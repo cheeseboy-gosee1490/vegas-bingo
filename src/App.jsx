@@ -8,7 +8,8 @@ import {
   setDoc,
   collection,
   getDocs,
-  deleteDoc
+  deleteDoc,
+  onSnapshot
 } from "firebase/firestore";
 
 const PLAYERS = [
@@ -73,23 +74,22 @@ export default function App() {
   const [owners, setOwners] = useState({});
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-  const loadOwners = async () => {
-    const snapshot = await getDocs(
-      collection(db, "squareOwners")
-    );
+useEffect(() => {
+  const unsubscribe = onSnapshot(
+    collection(db, "squareOwners"),
+    (snapshot) => {
+      const data = {};
 
-    const data = {};
+      snapshot.forEach((docSnap) => {
+        data[docSnap.id] =
+          docSnap.data().owner;
+      });
 
-    snapshot.forEach((docSnap) => {
-      data[docSnap.id] =
-        docSnap.data().owner;
-    });
+      setOwners(data);
+    }
+  );
 
-    setOwners(data);
-  };
-
-  loadOwners();
+  return () => unsubscribe();
 }, []);
   
   useEffect(() => {
