@@ -20,56 +20,45 @@ const PLAYERS = [
 ];
 
 const SQUARES = [
+  "Worst Sunburn Award",
   "Elvis Impersonator",
-  "Bride In Wedding Dress",
   "Bachelor Party",
   "Bachelorette Party",
-  "Someone Drinking Before 9am",
-  "Hear Mr Brightside",
-  "Limousine",
-  "Influencer Filming",
-  "Someone Crying",
-  "Celebrity Sighting",
-  "Lost Tourist",
-  "Proposal",
-  "Uber Queue Chaos",
+
+  "Drinking Before 9am",
+  "Fastest Drink Finished",
+  "Influencer Vlogging",
+  "Waymo Chaos",
+
   "Lamborghini",
-  "Casino Carpet Photo",
-  "Dog Wearing Clothes",
-  "Mobility Scooter",
-  "Rolls Royce",
-  "Carrying Shoes",
-  "What Happens In Vegas",
-  "Security Escort",
-  "Couple Arguing",
   "Selfie Stick",
-  "Wedding Happening",
-  "Group Shot With Strangers",
-  "Person Asleep In Public",
-  "High Limit Room",
-  "Slot Jackpot Celebration",
-  "Street Performer",
-  "Fake Designer Handbag",
-  "Matching Outfits",
-  "Cowboy Hat",
-  "Poker Face Sunglasses",
-  "Frozen Cocktail",
-  "Vegas Sign Selfie",
-  "Pool Party Wristband",
-  "Casino Chips Photo",
-  "Hotel Upgrade Story",
-  "Someone Lost Their Friends",
-  "Buffet Plate Mountain",
+  "Funniest Sleeping Photo",
+  "Bride in Wedding Dress",
+
+  "Groom in Wedding Attire",
   "Tattoo Shop",
-  "Sports Bet Slip",
-  "Blackjack Table",
-  "Roulette Spin",
-  "Bachelor Wearing Sash",
-  "Bachelorette Wearing Veil",
-  "Golf Polo Crew",
-  "Someone Singing Karaoke",
-  "Bellagio Fountain Video",
-  "Free Space"
+  "Celtic Shirt",
+  "Biggest Gambling Loss",
+
+  "Biggest Gambling Win",
+  "Rangers Shirt",
+  "Matching Shirts (4+)",
+  "Asleep at Slot Machine",
+
+  "Wearing a Kilt",
+  "First to Lose Room Key",
+  "Socks with Sandals",
+  "Neck Pillow Tourist Nowhere Near Airport",
+
+  "Georgia Lookalike",
+  "Scott Jr Lookalike",
+  "Most Steps Walked",
+  "Scott Sr Lookalike",
+
+  "Irene Lookalike",
+  "Claire Lookalike",
+  "Ryan Lookalike",
+  "Tackiest Souvenir ($10)"
 ];
 
 export default function App() {
@@ -78,42 +67,43 @@ export default function App() {
   );
 
   const [found, setFound] = useState({});
-const [screen, setScreen] = useState("board");
-const [leaderboard, setLeaderboard] = useState([]);
-const [loaded, setLoaded] = useState(false);
+  const [screen, setScreen] = useState("board");
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-  const loadLeaderboard = async () => {
-    const snapshot = await getDocs(
-      collection(db, "players")
-    );
+    const loadLeaderboard = async () => {
+      const snapshot = await getDocs(
+        collection(db, "players")
+      );
 
-    const scores = [];
+      const scores = [];
 
-    snapshot.forEach((playerDoc) => {
-      const data = playerDoc.data();
+      snapshot.forEach((playerDoc) => {
+        const data = playerDoc.data();
 
-      scores.push({
-        name: playerDoc.id,
-        score: data.score || 0
+        scores.push({
+          name: playerDoc.id,
+          score: data.score || 0
+        });
       });
-    });
 
-    scores.sort(
-      (a, b) => b.score - a.score
-    );
+      scores.sort(
+        (a, b) => b.score - a.score
+      );
 
-    setLeaderboard(scores);
-  };
+      setLeaderboard(scores);
+    };
 
-  loadLeaderboard();
-}, [found]);
+    loadLeaderboard();
+  }, [found]);
 
   useEffect(() => {
     const loadPlayer = async () => {
       if (!player) return;
 
       const ref = doc(db, "players", player);
+
       const snap = await getDoc(ref);
 
       if (snap.exists()) {
@@ -179,7 +169,7 @@ const [loaded, setLoaded] = useState(false);
     (count / SQUARES.length) * 100
   );
 
-  const bingo = count >= 25;
+  const bingo = count >= 16;
 
   if (!player) {
     return (
@@ -243,8 +233,7 @@ const [loaded, setLoaded] = useState(false);
           </div>
 
           <p>
-            {count}/{SQUARES.length} Found (
-            {percent}%)
+            {count}/{SQUARES.length} Found ({percent}%)
           </p>
 
           <div className="grid">
@@ -315,7 +304,11 @@ const [loaded, setLoaded] = useState(false);
       )}
 
       <div className="bottomNav">
-        <button onClick={() => setScreen("board")}>
+        <button
+          onClick={() =>
+            setScreen("board")
+          }
+        >
           🎰 Board
         </button>
 
@@ -327,7 +320,11 @@ const [loaded, setLoaded] = useState(false);
           🏆 Leaderboard
         </button>
 
-        <button onClick={() => setScreen("photos")}>
+        <button
+          onClick={() =>
+            setScreen("photos")
+          }
+        >
           📸 Photos
         </button>
 
