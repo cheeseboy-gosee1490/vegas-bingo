@@ -11,7 +11,7 @@ body {
 
 .app {
   padding: 20px;
-  max-width: 900px;
+  max-width: 1400px;
   margin: auto;
 }
 
@@ -72,14 +72,14 @@ h2 {
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
 .square {
   width: 100%;
   height: 110px;
 
-  border-radius: 12px;
+  border-radius: 14px;
   border: 2px solid #333;
 
   background: #111;
@@ -88,28 +88,44 @@ h2 {
   padding: 8px;
 
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.2s ease;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   text-align: center;
-  font-size: 14px;
   line-height: 1.2;
+  font-size: 14px;
 }
 
 .square:hover {
   border-color: #ff4fc3;
   transform: scale(1.03);
+  box-shadow:
+    0 0 10px rgba(255, 79, 195, 0.5);
 }
 
 .found {
-  background: #1c8f48;
-  border-color: #42ff87;
+  background: linear-gradient(
+    135deg,
+    #ff4fc3,
+    #ff9d00
+  );
+
+  color: white;
+
+  border-color: #ffffff;
+
   box-shadow:
-    0 0 10px #42ff87,
-    0 0 20px #42ff87;
+    0 0 15px #ff4fc3,
+    0 0 30px #ff9d00;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (max-width: 900px) {
