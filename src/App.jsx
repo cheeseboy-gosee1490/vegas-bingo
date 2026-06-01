@@ -77,13 +77,13 @@ export default function App() {
 
   const [found, setFound] = useState({});
   const [screen, setScreen] = useState("board");
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const loadPlayer = async () => {
       if (!player) return;
 
       const ref = doc(db, "players", player);
-
       const snap = await getDoc(ref);
 
       if (snap.exists()) {
@@ -92,14 +92,17 @@ export default function App() {
       } else {
         setFound({});
       }
+
+      setLoaded(true);
     };
 
+    setLoaded(false);
     loadPlayer();
   }, [player]);
 
   useEffect(() => {
     const savePlayer = async () => {
-      if (!player) return;
+      if (!player || !loaded) return;
 
       await setDoc(
         doc(db, "players", player),
@@ -114,7 +117,7 @@ export default function App() {
     };
 
     savePlayer();
-  }, [found, player]);
+  }, [found, player, loaded]);
 
   const toggleSquare = (square) => {
     setFound((prev) => ({
@@ -127,6 +130,7 @@ export default function App() {
     localStorage.removeItem("vegas-player");
     setPlayer("");
     setFound({});
+    setLoaded(false);
   };
 
   const resetBoard = () => {
@@ -289,11 +293,7 @@ export default function App() {
       )}
 
       <div className="bottomNav">
-        <button
-          onClick={() =>
-            setScreen("board")
-          }
-        >
+        <button onClick={() => setScreen("board")}>
           🎰 Board
         </button>
 
@@ -305,11 +305,7 @@ export default function App() {
           🏆 Leaderboard
         </button>
 
-        <button
-          onClick={() =>
-            setScreen("photos")
-          }
-        >
+        <button onClick={() => setScreen("photos")}>
           📸 Photos
         </button>
 
