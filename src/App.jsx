@@ -21,6 +21,15 @@ const PLAYERS = [
   "Ryan"
 ];
 
+const PLAYER_COLORS = {
+  "Scott Jr": "#22c55e",
+  "Scott Sr": "#f97316",
+  Georgia: "#ec4899",
+  Irene: "#a855f7",
+  Claire: "#3b82f6",
+  Ryan: "#ef4444"
+};
+
 const SQUARES = [
   "Worst Sunburn Award",
   "Elvis Impersonator",
@@ -282,19 +291,21 @@ useEffect(() => {
           
 <div className="grid">
   {SQUARES.map((square) => (
-    <button
-      key={square}
-      className={
-        owners[square]
-          ? "square found"
-          : found[square]
-          ? "square found"
-          : "square"
-      }
-      onClick={() =>
-        toggleSquare(square)
-      }
-    >
+   <button
+  key={square}
+  className="square"
+  style={{
+    background: owners[square]
+      ? PLAYER_COLORS[owners[square]]
+      : undefined,
+    borderColor: owners[square]
+      ? "#fff"
+      : undefined
+  }}
+  onClick={() =>
+    toggleSquare(square)
+  }
+>
       {square}
     </button>
   ))}
