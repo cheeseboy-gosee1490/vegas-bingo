@@ -11,7 +11,7 @@ body {
 
 .app {
   padding: 20px;
-  max-width: 1200px;
+  max-width: 900px;
   margin: auto;
 }
 
@@ -20,7 +20,8 @@ h1 {
   color: #ff4fc3;
   text-shadow:
     0 0 10px #ff4fc3,
-    0 0 20px #ff4fc3;
+    0 0 20px #ff4fc3,
+    0 0 40px #ff4fc3;
 }
 
 h2 {
@@ -37,15 +38,18 @@ h2 {
   color: white;
   font-size: 18px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .playerBtn:hover {
   background: #ff4fc3;
+  color: black;
 }
 
 .playerTag {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 18px;
 }
 
 .progress {
@@ -65,47 +69,71 @@ h2 {
   );
 }
 
-..grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
 }
 
 .square {
-  min-height: 100px;
+  width: 100%;
+  height: 110px;
+
   border-radius: 12px;
   border: 2px solid #333;
+
   background: #111;
   color: white;
-  padding: 10px;
+
+  padding: 8px;
+
   cursor: pointer;
   transition: 0.2s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 .square:hover {
   border-color: #ff4fc3;
+  transform: scale(1.03);
 }
 
 .found {
   background: #1c8f48;
   border-color: #42ff87;
-  color: white;
   box-shadow:
-    0 0 12px #42ff87;
+    0 0 10px #42ff87,
+    0 0 20px #42ff87;
 }
 
-@@media (max-width: 900px) {
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 600px) {
+  .app {
+    padding: 12px;
+  }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
   .square {
-    min-height: 90px;
+    height: 90px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 32px;
   }
 }
