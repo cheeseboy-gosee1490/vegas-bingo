@@ -258,24 +258,25 @@ export default function App() {
           <p>
   Elvis Owner: {owners["Elvis Impersonator"]}
 </p>
-
-          <div className="grid">
-            {SQUARES.map((square) => (
-              <button
-                key={square}
-                className={
-                  found[square]
-                    ? "square found"
-                    : "square"
-                }
-                onClick={() =>
-                  toggleSquare(square)
-                }
-              >
-                {square}
-              </button>
-            ))}
-          </div>
+<div className="grid">
+  {SQUARES.map((square) => (
+    <button
+      key={square}
+      className={
+        owners[square]
+          ? "square found"
+          : found[square]
+          ? "square found"
+          : "square"
+      }
+      onClick={() =>
+        toggleSquare(square)
+      }
+    >
+      {square}
+    </button>
+  ))}
+</div>
         </>
       )}
 
