@@ -68,17 +68,21 @@ export default function App() {
   );
 
   const [found, setFound] = useState(
-    JSON.parse(localStorage.getItem("vegas-found") || "{}")
+    JSON.parse(
+      localStorage.getItem(
+        `vegas-found-${localStorage.getItem("vegas-player")}`
+      ) || "{}"
+    )
   );
 
   const [screen, setScreen] = useState("board");
 
   useEffect(() => {
     localStorage.setItem(
-      "vegas-found",
+      `vegas-found-${player}`,
       JSON.stringify(found)
     );
-  }, [found]);
+  }, [found, player]);
 
   const toggleSquare = (square) => {
     setFound({
@@ -94,12 +98,15 @@ export default function App() {
 
   const resetBoard = () => {
     if (window.confirm("Reset all progress?")) {
-      localStorage.removeItem("vegas-found");
+      localStorage.removeItem(
+        `vegas-found-${player}`
+      );
       setFound({});
     }
   };
 
   const count = Object.values(found).filter(Boolean).length;
+
   const percent = Math.round(
     (count / SQUARES.length) * 100
   );
@@ -110,7 +117,8 @@ export default function App() {
     name,
     score:
       name === player
-        ? Object.values(found).filter(Boolean).length
+        ? Object.values(found).filter(Boolean)
+            .length
         : 0
   })).sort((a, b) => b.score - a.score);
 
