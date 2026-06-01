@@ -52,7 +52,6 @@ h2 {
 
 .playerBtn:hover {
   background: #ff4fc3;
-  color: white;
 }
 
 .topButtons {
@@ -98,9 +97,8 @@ h2 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-  margin-top: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 
 .square {
@@ -139,8 +137,6 @@ h2 {
     0 0 30px #ff9d00;
 }
 
-/* NEW BINGO BANNER */
-
 .bingoBanner {
   background: linear-gradient(
     135deg,
@@ -149,25 +145,17 @@ h2 {
   );
 
   color: white;
-
   padding: 20px;
-
   border-radius: 16px;
-
   text-align: center;
-
   font-size: 24px;
-
   font-weight: bold;
-
   margin-bottom: 20px;
 
   box-shadow:
     0 0 20px #ff4fc3,
     0 0 40px #ff9d00;
 }
-
-/* LEADERBOARD */
 
 .leaderboard {
   max-width: 700px;
@@ -191,8 +179,6 @@ h2 {
   color: #ffb000;
 }
 
-/* BOTTOM NAV */
-
 .bottomNav {
   display: flex;
   justify-content: center;
@@ -201,22 +187,31 @@ h2 {
   flex-wrap: wrap;
 }
 
-/* MOBILE */
+/* TABLET */
 
 @media (max-width: 900px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .square {
-    min-height: 90px;
-    font-size: 0.85rem;
+    min-height: 85px;
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}
+
+/* PHONE */
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .square {
+    min-height: 75px;
+    font-size: 0.72rem;
+    padding: 6px;
   }
 
   h1 {
