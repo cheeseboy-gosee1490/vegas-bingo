@@ -7,7 +7,8 @@ import {
   getDoc,
   setDoc,
   collection,
-  getDocs
+  getDocs,
+  deleteDoc
 } from "firebase/firestore";
 
 const PLAYERS = [
@@ -159,12 +160,35 @@ export default function App() {
     savePlayer();
   }, [found, player, loaded]);
 
-  const toggleSquare = (square) => {
-    setFound((prev) => ({
-      ...prev,
-      [square]: !prev[square]
-    }));
-  };
+  const toggleSquare = async (square) => {
+  const owner = owners[square];
+
+  if (owner === player) {
+    await deleteDoc(
+      doc(db, "squareOwners", square)
+    );
+
+    setOwners((prev) => {
+      const copy = { ...prev };
+      delete copy[square];
+      return copy;
+    });
+
+    return;
+  }
+
+  await setDoc(
+    doc(db, "squareOwners", square),
+    {
+      owner: player
+    }
+  );
+
+  setOwners((prev) => ({
+    ...prev,
+    [square]: player
+  }));
+};
 
   const changePlayer = () => {
     localStorage.removeItem("vegas-player");
