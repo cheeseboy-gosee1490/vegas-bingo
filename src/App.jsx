@@ -62,22 +62,28 @@ const SQUARES = [
   "Free Space"
 ];
 
+const leaderboard = [
+  { name: "Ryan", score: 12 },
+  { name: "Scott Jr", score: 10 },
+  { name: "Georgia", score: 8 },
+  { name: "Claire", score: 7 },
+  { name: "Irene", score: 5 },
+  { name: "Scott Sr", score: 4 }
+];
+
 export default function App() {
   const [player, setPlayer] = useState(
     localStorage.getItem("vegas-player") || ""
   );
 
+  const [screen, setScreen] = useState("board");
+
   const [found, setFound] = useState(
     JSON.parse(localStorage.getItem("vegas-found") || "{}")
   );
 
-  const [screen, setScreen] = useState("board");
-
   useEffect(() => {
-    localStorage.setItem(
-      "vegas-found",
-      JSON.stringify(found)
-    );
+    localStorage.setItem("vegas-found", JSON.stringify(found));
   }, [found]);
 
   const toggleSquare = (square) => {
@@ -87,45 +93,23 @@ export default function App() {
     });
   };
 
+  const resetBoard = () => {
+    localStorage.removeItem("vegas-found");
+    setFound({});
+  };
+
   const changePlayer = () => {
     localStorage.removeItem("vegas-player");
-    window.location.reload();
+    setPlayer("");
   };
 
-  const resetBoard = () => {
-    if (
-      window.confirm(
-        "Reset all progress?"
-      )
-    ) {
-      localStorage.removeItem("vegas-found");
-      setFound({});
-    }
-  };
-
-  const count =
-    Object.values(found).filter(Boolean)
-      .length;
-
-  const percent = Math.round(
-    (count / SQUARES.length) * 100
-  );
-
-  const leaderboard = PLAYERS.map(
-    (name) => ({
-      name,
-      score:
-        player === name
-          ? count
-          : 0
-    })
-  ).sort((a, b) => b.score - a.score);
+  const count = Object.values(found).filter(Boolean).length;
+  const percent = Math.round((count / SQUARES.length) * 100);
 
   if (!player) {
     return (
       <div className="app">
         <h1>🎰 Vegas Bingo 2026</h1>
-
         <h2>Select Player</h2>
 
         {PLAYERS.map((p) => (
@@ -133,10 +117,7 @@ export default function App() {
             key={p}
             className="playerBtn"
             onClick={() => {
-              localStorage.setItem(
-                "vegas-player",
-                p
-              );
+              localStorage.setItem("vegas-player", p);
               setPlayer(p);
             }}
           >
@@ -156,15 +137,11 @@ export default function App() {
       </div>
 
       <div className="topButtons">
-        <button
-          onClick={changePlayer}
-        >
+        <button onClick={changePlayer}>
           Change Player
         </button>
 
-        <button
-          onClick={resetBoard}
-        >
+        <button onClick={resetBoard}>
           Reset Board
         </button>
       </div>
@@ -174,15 +151,12 @@ export default function App() {
           <div className="progress">
             <div
               className="progressFill"
-              style={{
-                width: `${percent}%`
-              }}
+              style={{ width: `${percent}%` }}
             />
           </div>
 
           <p>
-            {count}/{SQUARES.length} Found (
-            {percent}%)
+            {count}/{SQUARES.length} Found ({percent}%)
           </p>
 
           <div className="grid">
@@ -194,9 +168,7 @@ export default function App() {
                     ? "square found"
                     : "square"
                 }
-                onClick={() =>
-                  toggleSquare(square)
-                }
+                onClick={() => toggleSquare(square)}
               >
                 {square}
               </button>
@@ -209,43 +181,55 @@ export default function App() {
         <div className="leaderboard">
           <h2>🏆 Leaderboard</h2>
 
-          {leaderboard.map(
-            (entry, index) => (
-              <div
-                key={entry.name}
-                className="leaderRow"
-              >
-                <span>
-                  {index + 1}.{" "}
-                  {entry.name}
-                </span>
+          {leaderboard.map((p, index) => (
+            <div className="leaderRow" key={p.name}>
+              <span>
+                {index + 1}. {p.name}
+              </span>
 
-                <strong>
-                  {entry.score}
-                </strong>
-              </div>
-            )
-          )}
+              <strong>{p.score}</strong>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {screen === "photos" && (
+        <div className="leaderboard">
+          <h2>📸 Photos</h2>
+
+          <div className="leaderRow">
+            Photo uploads coming next...
+          </div>
+        </div>
+      )}
+
+      {screen === "settings" && (
+        <div className="leaderboard">
+          <h2>⚙️ Settings</h2>
+
+          <div className="leaderRow">
+            Room Code: VEGAS26
+          </div>
         </div>
       )}
 
       <div className="bottomNav">
-        <button
-          onClick={() =>
-            setScreen("board")
-          }
-        >
+        <button onClick={() => setScreen("board")}>
           🎰 Board
         </button>
 
         <button
-          onClick={() =>
-            setScreen(
-              "leaderboard"
-            )
-          }
+          onClick={() => setScreen("leaderboard")}
         >
           🏆 Leaderboard
+        </button>
+
+        <button onClick={() => setScreen("photos")}>
+          📸 Photos
+        </button>
+
+        <button onClick={() => setScreen("settings")}>
+          ⚙️ Settings
         </button>
       </div>
     </div>
