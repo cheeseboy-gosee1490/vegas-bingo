@@ -69,8 +69,28 @@ export default function App() {
   const [found, setFound] = useState({});
   const [screen, setScreen] = useState("board");
   const [leaderboard, setLeaderboard] = useState([]);
+  const [owners, setOwners] = useState({});
   const [loaded, setLoaded] = useState(false);
 
+  useEffect(() => {
+  const loadOwners = async () => {
+    const snapshot = await getDocs(
+      collection(db, "squareOwners")
+    );
+
+    const data = {};
+
+    snapshot.forEach((docSnap) => {
+      data[docSnap.id] =
+        docSnap.data().owner;
+    });
+
+    setOwners(data);
+  };
+
+  loadOwners();
+}, []);
+  
   useEffect(() => {
     const loadLeaderboard = async () => {
       const snapshot = await getDocs(
@@ -235,6 +255,9 @@ export default function App() {
           <p>
             {count}/{SQUARES.length} Found ({percent}%)
           </p>
+          <p>
+  Elvis Owner: {owners["Elvis Impersonator"]}
+</p>
 
           <div className="grid">
             {SQUARES.map((square) => (
