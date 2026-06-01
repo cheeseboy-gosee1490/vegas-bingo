@@ -255,9 +255,7 @@ export default function App() {
           <p>
             {count}/{SQUARES.length} Found ({percent}%)
           </p>
-          <p>
-  Elvis Owner: {owners["Elvis Impersonator"]}
-</p>
+          
 <div className="grid">
   {SQUARES.map((square) => (
     <button
