@@ -65,10 +65,9 @@ h2 {
   );
 }
 
-.grid {
+..grid {
   display: grid;
-  grid-template-columns:
-    repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
 }
 
@@ -95,10 +94,15 @@ h2 {
     0 0 12px #42ff87;
 }
 
+@@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 600px) {
   .grid {
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .square {
