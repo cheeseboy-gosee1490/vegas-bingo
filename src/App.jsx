@@ -62,28 +62,22 @@ const SQUARES = [
   "Free Space"
 ];
 
-const leaderboard = [
-  { name: "Ryan", score: 12 },
-  { name: "Scott Jr", score: 10 },
-  { name: "Georgia", score: 8 },
-  { name: "Claire", score: 7 },
-  { name: "Irene", score: 5 },
-  { name: "Scott Sr", score: 4 }
-];
-
 export default function App() {
   const [player, setPlayer] = useState(
     localStorage.getItem("vegas-player") || ""
   );
 
-  const [screen, setScreen] = useState("board");
-
   const [found, setFound] = useState(
     JSON.parse(localStorage.getItem("vegas-found") || "{}")
   );
 
+  const [screen, setScreen] = useState("board");
+
   useEffect(() => {
-    localStorage.setItem("vegas-found", JSON.stringify(found));
+    localStorage.setItem(
+      "vegas-found",
+      JSON.stringify(found)
+    );
   }, [found]);
 
   const toggleSquare = (square) => {
@@ -93,145 +87,39 @@ export default function App() {
     });
   };
 
-  const resetBoard = () => {
-    localStorage.removeItem("vegas-found");
-    setFound({});
-  };
-
   const changePlayer = () => {
     localStorage.removeItem("vegas-player");
-    setPlayer("");
+    window.location.reload();
   };
 
+  const resetBoard = () => {
+    if (window.confirm("Reset all progress?")) {
+      localStorage.removeItem("vegas-found");
+      setFound({});
+    }
+  };
+
+  const leaderboard = PLAYERS.map((name) => ({
+    name,
+    score:
+      player === name
+        ? Object.values(found).filter(Boolean).length
+        : 0
+  })).sort((a, b) => b.score - a.score);
+
   const count = Object.values(found).filter(Boolean).length;
-  const percent = Math.round((count / SQUARES.length) * 100);
+  const percent = Math.round(
+    (count / SQUARES.length) * 100
+  );
 
   if (!player) {
     return (
       <div className="app">
         <h1>🎰 Vegas Bingo 2026</h1>
+
         <h2>Select Player</h2>
 
         {PLAYERS.map((p) => (
           <button
             key={p}
-            className="playerBtn"
-            onClick={() => {
-              localStorage.setItem("vegas-player", p);
-              setPlayer(p);
-            }}
-          >
-            {p}
-          </button>
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div className="app">
-      <h1>🎰 Vegas Bingo 2026</h1>
-
-      <div className="playerTag">
-        Playing as: <strong>{player}</strong>
-      </div>
-
-      <div className="topButtons">
-        <button onClick={changePlayer}>
-          Change Player
-        </button>
-
-        <button onClick={resetBoard}>
-          Reset Board
-        </button>
-      </div>
-
-      {screen === "board" && (
-        <>
-          <div className="progress">
-            <div
-              className="progressFill"
-              style={{ width: `${percent}%` }}
-            />
-          </div>
-
-          <p>
-            {count}/{SQUARES.length} Found ({percent}%)
-          </p>
-
-          <div className="grid">
-            {SQUARES.map((square) => (
-              <button
-                key={square}
-                className={
-                  found[square]
-                    ? "square found"
-                    : "square"
-                }
-                onClick={() => toggleSquare(square)}
-              >
-                {square}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-
-      {screen === "leaderboard" && (
-        <div className="leaderboard">
-          <h2>🏆 Leaderboard</h2>
-
-          {leaderboard.map((p, index) => (
-            <div className="leaderRow" key={p.name}>
-              <span>
-                {index + 1}. {p.name}
-              </span>
-
-              <strong>{p.score}</strong>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {screen === "photos" && (
-        <div className="leaderboard">
-          <h2>📸 Photos</h2>
-
-          <div className="leaderRow">
-            Photo uploads coming next...
-          </div>
-        </div>
-      )}
-
-      {screen === "settings" && (
-        <div className="leaderboard">
-          <h2>⚙️ Settings</h2>
-
-          <div className="leaderRow">
-            Room Code: VEGAS26
-          </div>
-        </div>
-      )}
-
-      <div className="bottomNav">
-        <button onClick={() => setScreen("board")}>
-          🎰 Board
-        </button>
-
-        <button
-          onClick={() => setScreen("leaderboard")}
-        >
-          🏆 Leaderboard
-        </button>
-
-        <button onClick={() => setScreen("photos")}>
-          📸 Photos
-        </button>
-
-        <button onClick={() => setScreen("settings")}>
-          ⚙️ Settings
-        </button>
-      </div>
-    </div>
-  );
-}
+            className="
