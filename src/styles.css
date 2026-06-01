@@ -1,0 +1,1 @@
+body{font-family:Arial;margin:0;background:#111;color:#fff} .wrap{padding:20px} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px} button{padding:15px;border-radius:10px;border:0;min-height:80px} .on{background:#3ddc84}
