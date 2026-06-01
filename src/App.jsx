@@ -67,17 +67,25 @@ export default function App() {
     localStorage.getItem("vegas-player") || ""
   );
 
-  const [found, setFound] = useState(
-    JSON.parse(
-      localStorage.getItem(
-        `vegas-found-${localStorage.getItem("vegas-player")}`
-      ) || "{}"
-    )
-  );
+  const [found, setFound] = useState({});
 
   const [screen, setScreen] = useState("board");
 
   useEffect(() => {
+    if (!player) return;
+
+    const saved = JSON.parse(
+      localStorage.getItem(
+        `vegas-found-${player}`
+      ) || "{}"
+    );
+
+    setFound(saved);
+  }, [player]);
+
+  useEffect(() => {
+    if (!player) return;
+
     localStorage.setItem(
       `vegas-found-${player}`,
       JSON.stringify(found)
@@ -85,15 +93,16 @@ export default function App() {
   }, [found, player]);
 
   const toggleSquare = (square) => {
-    setFound({
-      ...found,
-      [square]: !found[square]
-    });
+    setFound((prev) => ({
+      ...prev,
+      [square]: !prev[square]
+    }));
   };
 
   const changePlayer = () => {
     localStorage.removeItem("vegas-player");
-    window.location.reload();
+    setPlayer("");
+    setFound({});
   };
 
   const resetBoard = () => {
@@ -105,7 +114,8 @@ export default function App() {
     }
   };
 
-  const count = Object.values(found).filter(Boolean).length;
+  const count =
+    Object.values(found).filter(Boolean).length;
 
   const percent = Math.round(
     (count / SQUARES.length) * 100
@@ -113,14 +123,20 @@ export default function App() {
 
   const bingo = count >= 25;
 
-  const leaderboard = PLAYERS.map((name) => ({
-    name,
-    score:
-      name === player
-        ? Object.values(found).filter(Boolean)
-            .length
-        : 0
-  })).sort((a, b) => b.score - a.score);
+  const leaderboard = PLAYERS.map((name) => {
+    const saved = JSON.parse(
+      localStorage.getItem(
+        `vegas-found-${name}`
+      ) || "{}"
+    );
+
+    return {
+      name,
+      score:
+        Object.values(saved).filter(Boolean)
+          .length
+    };
+  }).sort((a, b) => b.score - a.score);
 
   if (!player) {
     return (
@@ -246,17 +262,17 @@ export default function App() {
           <h2>⚙️ Settings</h2>
 
           <div className="leaderRow">
-            More settings coming soon...
+            Room Code: VEGAS26
+          </div>
+
+          <div className="leaderRow">
+            Players: 6
           </div>
         </div>
       )}
 
       <div className="bottomNav">
-        <button
-          onClick={() =>
-            setScreen("board")
-          }
-        >
+        <button onClick={() => setScreen("board")}>
           🎰 Board
         </button>
 
@@ -268,11 +284,7 @@ export default function App() {
           🏆 Leaderboard
         </button>
 
-        <button
-          onClick={() =>
-            setScreen("photos")
-          }
-        >
+        <button onClick={() => setScreen("photos")}>
           📸 Photos
         </button>
 
