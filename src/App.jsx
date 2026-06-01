@@ -5,7 +5,9 @@ import { db } from "./firebase";
 import {
   doc,
   getDoc,
-  setDoc
+  setDoc,
+  collection,
+  getDocs
 } from "firebase/firestore";
 
 const PLAYERS = [
@@ -76,8 +78,36 @@ export default function App() {
   );
 
   const [found, setFound] = useState({});
-  const [screen, setScreen] = useState("board");
-  const [loaded, setLoaded] = useState(false);
+const [screen, setScreen] = useState("board");
+const [leaderboard, setLeaderboard] = useState([]);
+const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+  const loadLeaderboard = async () => {
+    const snapshot = await getDocs(
+      collection(db, "players")
+    );
+
+    const scores = [];
+
+    snapshot.forEach((playerDoc) => {
+      const data = playerDoc.data();
+
+      scores.push({
+        name: playerDoc.id,
+        score: data.score || 0
+      });
+    });
+
+    scores.sort(
+      (a, b) => b.score - a.score
+    );
+
+    setLeaderboard(scores);
+  };
+
+  loadLeaderboard();
+}, [found]);
 
   useEffect(() => {
     const loadPlayer = async () => {
@@ -150,14 +180,6 @@ export default function App() {
   );
 
   const bingo = count >= 25;
-
-  const leaderboard = PLAYERS.map(
-    (name) => ({
-      name,
-      score:
-        name === player ? count : 0
-    })
-  ).sort((a, b) => b.score - a.score);
 
   if (!player) {
     return (
