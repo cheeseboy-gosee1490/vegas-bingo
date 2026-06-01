@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
 
+import { db } from "./firebase";
+
+import {
+  doc,
+  getDoc,
+  setDoc
+} from "firebase/firestore";
+
 const PLAYERS = [
   "Scott Jr",
   "Scott Sr",
@@ -68,28 +76,44 @@ export default function App() {
   );
 
   const [found, setFound] = useState({});
-
   const [screen, setScreen] = useState("board");
 
   useEffect(() => {
-    if (!player) return;
+    const loadPlayer = async () => {
+      if (!player) return;
 
-    const saved = JSON.parse(
-      localStorage.getItem(
-        `vegas-found-${player}`
-      ) || "{}"
-    );
+      const ref = doc(db, "players", player);
 
-    setFound(saved);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        const data = snap.data();
+        setFound(data.found || {});
+      } else {
+        setFound({});
+      }
+    };
+
+    loadPlayer();
   }, [player]);
 
   useEffect(() => {
-    if (!player) return;
+    const savePlayer = async () => {
+      if (!player) return;
 
-    localStorage.setItem(
-      `vegas-found-${player}`,
-      JSON.stringify(found)
-    );
+      await setDoc(
+        doc(db, "players", player),
+        {
+          found,
+          score:
+            Object.values(found).filter(Boolean)
+              .length
+        },
+        { merge: true }
+      );
+    };
+
+    savePlayer();
   }, [found, player]);
 
   const toggleSquare = (square) => {
@@ -106,16 +130,16 @@ export default function App() {
   };
 
   const resetBoard = () => {
-    if (window.confirm("Reset all progress?")) {
-      localStorage.removeItem(
-        `vegas-found-${player}`
-      );
+    if (
+      window.confirm("Reset all progress?")
+    ) {
       setFound({});
     }
   };
 
   const count =
-    Object.values(found).filter(Boolean).length;
+    Object.values(found).filter(Boolean)
+      .length;
 
   const percent = Math.round(
     (count / SQUARES.length) * 100
@@ -123,20 +147,13 @@ export default function App() {
 
   const bingo = count >= 25;
 
-  const leaderboard = PLAYERS.map((name) => {
-    const saved = JSON.parse(
-      localStorage.getItem(
-        `vegas-found-${name}`
-      ) || "{}"
-    );
-
-    return {
+  const leaderboard = PLAYERS.map(
+    (name) => ({
       name,
       score:
-        Object.values(saved).filter(Boolean)
-          .length
-    };
-  }).sort((a, b) => b.score - a.score);
+        name === player ? count : 0
+    })
+  ).sort((a, b) => b.score - a.score);
 
   if (!player) {
     return (
@@ -272,7 +289,11 @@ export default function App() {
       )}
 
       <div className="bottomNav">
-        <button onClick={() => setScreen("board")}>
+        <button
+          onClick={() =>
+            setScreen("board")
+          }
+        >
           🎰 Board
         </button>
 
@@ -284,7 +305,11 @@ export default function App() {
           🏆 Leaderboard
         </button>
 
-        <button onClick={() => setScreen("photos")}>
+        <button
+          onClick={() =>
+            setScreen("photos")
+          }
+        >
           📸 Photos
         </button>
 
