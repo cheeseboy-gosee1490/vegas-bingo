@@ -1,201 +1,253 @@
-* {
-  box-sizing: border-box;
-}
+import React, { useState, useEffect } from "react";
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #080010;
-  color: white;
-}
+const PLAYERS = [
+  "Scott Jr",
+  "Scott Sr",
+  "Georgia",
+  "Irene",
+  "Claire",
+  "Ryan"
+];
 
-.app {
-  padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+const SQUARES = [
+  "Elvis Impersonator",
+  "Bride In Wedding Dress",
+  "Bachelor Party",
+  "Bachelorette Party",
+  "Someone Drinking Before 9am",
+  "Hear Mr Brightside",
+  "Limousine",
+  "Influencer Filming",
+  "Someone Crying",
+  "Celebrity Sighting",
+  "Lost Tourist",
+  "Proposal",
+  "Uber Queue Chaos",
+  "Lamborghini",
+  "Casino Carpet Photo",
+  "Dog Wearing Clothes",
+  "Mobility Scooter",
+  "Rolls Royce",
+  "Carrying Shoes",
+  "What Happens In Vegas",
+  "Security Escort",
+  "Couple Arguing",
+  "Selfie Stick",
+  "Wedding Happening",
+  "Group Shot With Strangers",
+  "Person Asleep In Public",
+  "High Limit Room",
+  "Slot Jackpot Celebration",
+  "Street Performer",
+  "Fake Designer Handbag",
+  "Matching Outfits",
+  "Cowboy Hat",
+  "Poker Face Sunglasses",
+  "Frozen Cocktail",
+  "Vegas Sign Selfie",
+  "Pool Party Wristband",
+  "Casino Chips Photo",
+  "Hotel Upgrade Story",
+  "Someone Lost Their Friends",
+  "Buffet Plate Mountain",
+  "Tattoo Shop",
+  "Sports Bet Slip",
+  "Blackjack Table",
+  "Roulette Spin",
+  "Bachelor Wearing Sash",
+  "Bachelorette Wearing Veil",
+  "Golf Polo Crew",
+  "Someone Singing Karaoke",
+  "Bellagio Fountain Video",
+  "Free Space"
+];
 
-h1 {
-  text-align: center;
-  color: #ff4fc3;
-  text-shadow:
-    0 0 10px #ff4fc3,
-    0 0 20px #ff4fc3,
-    0 0 40px #ff4fc3;
-  margin-bottom: 10px;
-}
-
-h2 {
-  text-align: center;
-}
-
-.playerTag {
-  text-align: center;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.playerBtn {
-  width: 100%;
-  max-width: 700px;
-  display: block;
-  margin: 12px auto;
-  padding: 18px;
-  border-radius: 14px;
-  border: 2px solid #ff4fc3;
-  background: transparent;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.playerBtn:hover {
-  background: #ff4fc3;
-}
-
-.progress {
-  height: 18px;
-  background: #222;
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-
-.progressFill {
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    #ff4fc3,
-    #ff9d00
-  );
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.square {
-  min-height: 110px;
-  border-radius: 16px;
-  border: 2px solid #333;
-  background: #111;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 15px;
-  line-height: 1.3;
-  transition: 0.2s;
-}
-
-.square:hover {
-  border-color: #ff4fc3;
-  transform: scale(1.03);
-}
-
-.found {
-  background: linear-gradient(
-    135deg,
-    #ff4fc3,
-    #ff9d00
+export default function App() {
+  const [player, setPlayer] = useState(
+    localStorage.getItem("vegas-player") || ""
   );
 
-  border-color: white;
+  const [found, setFound] = useState(
+    JSON.parse(localStorage.getItem("vegas-found") || "{}")
+  );
 
-  color: white;
+  const [screen, setScreen] = useState("board");
 
-  box-shadow:
-    0 0 15px #ff4fc3,
-    0 0 30px #ff9d00;
-}
+  useEffect(() => {
+    localStorage.setItem(
+      "vegas-found",
+      JSON.stringify(found)
+    );
+  }, [found]);
 
-.topButtons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
+  const toggleSquare = (square) => {
+    setFound({
+      ...found,
+      [square]: !found[square]
+    });
+  };
 
-.topButtons button,
-.bottomNav button {
-  background: #111;
-  color: white;
-  border: 2px solid #ff4fc3;
-  border-radius: 12px;
-  padding: 12px 18px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+  const changePlayer = () => {
+    localStorage.removeItem("vegas-player");
+    window.location.reload();
+  };
 
-.topButtons button:hover,
-.bottomNav button:hover {
-  background: #ff4fc3;
-}
+  const resetBoard = () => {
+    if (
+      window.confirm(
+        "Reset all progress?"
+      )
+    ) {
+      localStorage.removeItem("vegas-found");
+      setFound({});
+    }
+  };
 
-.bottomNav {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 30px;
-}
+  const count =
+    Object.values(found).filter(Boolean)
+      .length;
 
-.leaderboard {
-  max-width: 700px;
-  margin: 30px auto;
-}
+  const percent = Math.round(
+    (count / SQUARES.length) * 100
+  );
 
-.leaderboard h2 {
-  margin-bottom: 20px;
-}
+  const leaderboard = PLAYERS.map(
+    (name) => ({
+      name,
+      score:
+        player === name
+          ? count
+          : 0
+    })
+  ).sort((a, b) => b.score - a.score);
 
-.leaderRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #111;
-  border: 1px solid #333;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 10px;
-}
+  if (!player) {
+    return (
+      <div className="app">
+        <h1>🎰 Vegas Bingo 2026</h1>
 
-.leaderRow strong {
-  color: #ff9d00;
-}
+        <h2>Select Player</h2>
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .app {
-    padding: 12px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .square {
-    min-height: 90px;
-    font-size: 13px;
+        {PLAYERS.map((p) => (
+          <button
+            key={p}
+            className="playerBtn"
+            onClick={() => {
+              localStorage.setItem(
+                "vegas-player",
+                p
+              );
+              setPlayer(p);
+            }}
+          >
+            {p}
+          </button>
+        ))}
+      </div>
+    );
   }
 
-  .topButtons {
-    flex-direction: column;
-  }
+  return (
+    <div className="app">
+      <h1>🎰 Vegas Bingo 2026</h1>
 
-  .bottomNav {
-    flex-direction: column;
-  }
+      <div className="playerTag">
+        Playing as: <strong>{player}</strong>
+      </div>
 
-  h1 {
-    font-size: 32px;
-  }
+      <div className="topButtons">
+        <button
+          onClick={changePlayer}
+        >
+          Change Player
+        </button>
+
+        <button
+          onClick={resetBoard}
+        >
+          Reset Board
+        </button>
+      </div>
+
+      {screen === "board" && (
+        <>
+          <div className="progress">
+            <div
+              className="progressFill"
+              style={{
+                width: `${percent}%`
+              }}
+            />
+          </div>
+
+          <p>
+            {count}/{SQUARES.length} Found (
+            {percent}%)
+          </p>
+
+          <div className="grid">
+            {SQUARES.map((square) => (
+              <button
+                key={square}
+                className={
+                  found[square]
+                    ? "square found"
+                    : "square"
+                }
+                onClick={() =>
+                  toggleSquare(square)
+                }
+              >
+                {square}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {screen === "leaderboard" && (
+        <div className="leaderboard">
+          <h2>🏆 Leaderboard</h2>
+
+          {leaderboard.map(
+            (entry, index) => (
+              <div
+                key={entry.name}
+                className="leaderRow"
+              >
+                <span>
+                  {index + 1}.{" "}
+                  {entry.name}
+                </span>
+
+                <strong>
+                  {entry.score}
+                </strong>
+              </div>
+            )
+          )}
+        </div>
+      )}
+
+      <div className="bottomNav">
+        <button
+          onClick={() =>
+            setScreen("board")
+          }
+        >
+          🎰 Board
+        </button>
+
+        <button
+          onClick={() =>
+            setScreen(
+              "leaderboard"
+            )
+          }
+        >
+          🏆 Leaderboard
+        </button>
+      </div>
+    </div>
+  );
 }
