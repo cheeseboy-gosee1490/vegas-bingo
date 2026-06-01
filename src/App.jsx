@@ -1,57 +1,139 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const items = [
-  'Elvis impersonator',
-  'Bride in a wedding dress',
-  'Bachelor party',
-  'Bachelorette party',
-  'Someone drinking before 9am',
-  'Hear Mr Brightside',
-  'Limousine',
-  'Influencer filming',
-  'Someone crying',
-  'Celebrity sighting',
-  'Lost tourist',
-  'Proposal',
-  'Uber queue chaos',
-  'Lamborghini',
-  'Casino carpet photo',
-  'Dog wearing clothes',
-  'Mobility scooter',
-  'Rolls-Royce',
-  'Carrying shoes',
-  'What happens in Vegas'
+const PLAYERS = [
+  "Scott Jr",
+  "Scott Sr",
+  "Georgia",
+  "Irene",
+  "Claire",
+  "Ryan"
+];
+
+const SQUARES = [
+  "Elvis Impersonator",
+  "Bride in Wedding Dress",
+  "Bachelor Party",
+  "Bachelorette Party",
+  "Someone Drinking Before 9am",
+  "Hear Mr Brightside",
+  "Limousine",
+  "Influencer Filming",
+  "Someone Crying",
+  "Celebrity Sighting",
+  "Lost Tourist",
+  "Proposal",
+  "Uber Queue Chaos",
+  "Lamborghini",
+  "Casino Carpet Photo",
+  "Dog Wearing Clothes",
+  "Mobility Scooter",
+  "Rolls Royce",
+  "Carrying Shoes",
+  "What Happens In Vegas",
+  "Security Escort",
+  "Couple Arguing",
+  "Selfie Stick",
+  "Wedding Happening",
+  "Group Shot With Strangers",
+  "Person Asleep In Public",
+  "High Limit Room",
+  "Slot Jackpot Celebration",
+  "Street Performer",
+  "Fake Designer Handbag",
+  "Matching Outfits",
+  "Cowboy Hat",
+  "Poker Face Sunglasses",
+  "Frozen Cocktail",
+  "Vegas Sign Selfie",
+  "Pool Party Wristband",
+  "Casino Chips Photo",
+  "Hotel Upgrade Story",
+  "Someone Lost Their Friends",
+  "Buffet Plate Mountain",
+  "Tattoo Shop",
+  "Sports Bet Slip",
+  "Blackjack Table",
+  "Roulette Spin",
+  "Bachelor Wearing Sash",
+  "Bachelorette Wearing Veil",
+  "Golf Polo Crew",
+  "Someone Singing Karaoke",
+  "Bellagio Fountain Video",
+  "Free Space"
 ];
 
 export default function App() {
-  const [checked, setChecked] = useState(
-    () => JSON.parse(localStorage.getItem('vb') || '{}')
+  const [player, setPlayer] = useState(
+    localStorage.getItem("vegas-player") || ""
+  );
+
+  const [found, setFound] = useState(
+    JSON.parse(localStorage.getItem("vegas-found") || "{}")
   );
 
   useEffect(() => {
-    localStorage.setItem('vb', JSON.stringify(checked));
-  }, [checked]);
+    localStorage.setItem("vegas-found", JSON.stringify(found));
+  }, [found]);
 
-  const count = Object.values(checked).filter(Boolean).length;
+  const toggleSquare = (square) => {
+    setFound({
+      ...found,
+      [square]: !found[square]
+    });
+  };
+
+  const count = Object.values(found).filter(Boolean).length;
+  const percent = Math.round((count / SQUARES.length) * 100);
+
+  if (!player) {
+    return (
+      <div className="app">
+        <h1>🎰 Vegas Bingo 2026</h1>
+        <h2>Select Player</h2>
+
+        {PLAYERS.map((p) => (
+          <button
+            key={p}
+            className="playerBtn"
+            onClick={() => {
+              localStorage.setItem("vegas-player", p);
+              setPlayer(p);
+            }}
+          >
+            {p}
+          </button>
+        ))}
+      </div>
+    );
+  }
 
   return (
-    <div className="wrap">
-      <h1>🎰 Vegas Bingo</h1>
-      <p>{count}/{items.length} found</p>
+    <div className="app">
+      <h1>🎰 Vegas Bingo 2026</h1>
+
+      <div className="playerTag">
+        Playing as: <strong>{player}</strong>
+      </div>
+
+      <div className="progress">
+        <div
+          className="progressFill"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
+
+      <p>
+        {count}/{SQUARES.length} Found ({percent}%)
+      </p>
 
       <div className="grid">
-        {items.map(item => (
+        {SQUARES.map((square) => (
           <button
-            key={item}
-            className={checked[item] ? 'on' : ''}
-            onClick={() =>
-              setChecked({
-                ...checked,
-                [item]: !checked[item]
-              })
-            }
+            key={square}
+            className={found[square] ? "square found" : "square"}
+            onClick={() => toggleSquare(square)}
           >
-            {item}
+            {square}
           </button>
         ))}
       </div>
