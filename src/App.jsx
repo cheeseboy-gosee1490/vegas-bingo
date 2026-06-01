@@ -99,18 +99,20 @@ export default function App() {
     }
   };
 
-  const leaderboard = PLAYERS.map((name) => ({
-    name,
-    score:
-      player === name
-        ? Object.values(found).filter(Boolean).length
-        : 0
-  })).sort((a, b) => b.score - a.score);
-
   const count = Object.values(found).filter(Boolean).length;
   const percent = Math.round(
     (count / SQUARES.length) * 100
   );
+
+  const bingo = count >= 25;
+
+  const leaderboard = PLAYERS.map((name) => ({
+    name,
+    score:
+      name === player
+        ? Object.values(found).filter(Boolean).length
+        : 0
+  })).sort((a, b) => b.score - a.score);
 
   if (!player) {
     return (
@@ -122,4 +124,158 @@ export default function App() {
         {PLAYERS.map((p) => (
           <button
             key={p}
-            className="
+            className="playerBtn"
+            onClick={() => {
+              localStorage.setItem(
+                "vegas-player",
+                p
+              );
+              setPlayer(p);
+            }}
+          >
+            {p}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="app">
+      <h1>🎰 Vegas Bingo 2026</h1>
+
+      <div className="playerTag">
+        Playing as: <strong>{player}</strong>
+      </div>
+
+      <div className="topButtons">
+        <button onClick={changePlayer}>
+          Change Player
+        </button>
+
+        <button onClick={resetBoard}>
+          Reset Board
+        </button>
+      </div>
+
+      {screen === "board" && (
+        <>
+          {bingo && (
+            <div className="bingoBanner">
+              🎉 BINGO ACHIEVED! 🎉
+            </div>
+          )}
+
+          <div className="progress">
+            <div
+              className="progressFill"
+              style={{
+                width: `${percent}%`
+              }}
+            />
+          </div>
+
+          <p>
+            {count}/{SQUARES.length} Found (
+            {percent}%)
+          </p>
+
+          <div className="grid">
+            {SQUARES.map((square) => (
+              <button
+                key={square}
+                className={
+                  found[square]
+                    ? "square found"
+                    : "square"
+                }
+                onClick={() =>
+                  toggleSquare(square)
+                }
+              >
+                {square}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {screen === "leaderboard" && (
+        <div className="leaderboard">
+          <h2>🏆 Leaderboard</h2>
+
+          {leaderboard.map(
+            (entry, index) => (
+              <div
+                key={entry.name}
+                className="leaderRow"
+              >
+                <span>
+                  {index + 1}. {entry.name}
+                </span>
+
+                <strong>
+                  {entry.score}
+                </strong>
+              </div>
+            )
+          )}
+        </div>
+      )}
+
+      {screen === "photos" && (
+        <div className="leaderboard">
+          <h2>📸 Photos</h2>
+
+          <div className="leaderRow">
+            Photo uploads coming next...
+          </div>
+        </div>
+      )}
+
+      {screen === "settings" && (
+        <div className="leaderboard">
+          <h2>⚙️ Settings</h2>
+
+          <div className="leaderRow">
+            More settings coming soon...
+          </div>
+        </div>
+      )}
+
+      <div className="bottomNav">
+        <button
+          onClick={() =>
+            setScreen("board")
+          }
+        >
+          🎰 Board
+        </button>
+
+        <button
+          onClick={() =>
+            setScreen("leaderboard")
+          }
+        >
+          🏆 Leaderboard
+        </button>
+
+        <button
+          onClick={() =>
+            setScreen("photos")
+          }
+        >
+          📸 Photos
+        </button>
+
+        <button
+          onClick={() =>
+            setScreen("settings")
+          }
+        >
+          ⚙️ Settings
+        </button>
+      </div>
+    </div>
+  );
+}
