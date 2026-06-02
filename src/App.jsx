@@ -99,7 +99,32 @@ export default function App() {
 
 // square ownership listener
 useEffect(() => {
-  ...
+  const unsubscribe = onSnapshot(
+    collection(db, "activity"),
+    (snapshot) => {
+      const items = [];
+
+      snapshot.forEach((docSnap) => {
+        items.push({
+          id: docSnap.id,
+          ...docSnap.data()
+        });
+      });
+
+      items.sort((a, b) => {
+        const aTime =
+          a.timestamp?.seconds || 0;
+        const bTime =
+          b.timestamp?.seconds || 0;
+
+        return bTime - aTime;
+      });
+
+      setActivity(items);
+    }
+  );
+
+  return () => unsubscribe();
 }, []);
 
 // activity listener
