@@ -417,7 +417,15 @@ const count = Object.values(owners)
           </div>
 
           <p>
-            {count}/{SQUARES.length} Found ({percent}%)
+            {count}/{SQUARE<div className="progressCard">
+  <div className="progressTitle">
+    VEGAS 26
+  </div>
+
+  <div className="progressCount">
+    {count} / {SQUARES.length}
+  </div>
+</div>S.length} Found ({percent}%)
           </p>
           
 <div className="grid">
