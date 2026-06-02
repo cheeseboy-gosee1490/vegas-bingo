@@ -192,15 +192,18 @@ useEffect(() => {
     await deleteDoc(
       doc(db, "squareOwners", square)
     );
-await addDoc(
+const q = query(
   collection(db, "activity"),
-  {
-    player,
-    square,
-    action: "removed",
-    timestamp: serverTimestamp()
-  }
+  where("player", "==", player),
+  where("square", "==", square),
+  where("action", "==", "claimed")
 );
+
+const snapshot = await getDocs(q);
+
+for (const activityDoc of snapshot.docs) {
+  await deleteDoc(activityDoc.ref);
+}
     setOwners((prev) => {
       const copy = { ...prev };
       delete copy[square];
