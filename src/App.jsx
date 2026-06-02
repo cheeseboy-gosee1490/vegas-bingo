@@ -481,20 +481,26 @@ const count = Object.values(owners)
     key={entry.name}
     className="leaderRow"
     style={
-      index === 0
-        ? {
-            border: "1px solid #fbbf24",
-            boxShadow:
-              "0 0 12px rgba(251,191,36,0.4)"
-          }
-        : index === 1
-        ? {
-            border: "1px solid #cbd5e1",
-            boxShadow:
-              "0 0 10px rgba(203,213,225,0.3)"
-          }
-        : {}
-    }
+  index === 0
+    ? {
+        border: "1px solid #fbbf24",
+        boxShadow:
+          "0 0 12px rgba(251,191,36,0.4)"
+      }
+    : index === 1
+    ? {
+        border: "1px solid #cbd5e1",
+        boxShadow:
+          "0 0 10px rgba(203,213,225,0.3)"
+      }
+    : index === 2
+    ? {
+        border: "1px solid #cd7f32",
+        boxShadow:
+          "0 0 10px rgba(205,127,50,0.3)"
+      }
+    : {}
+}
   >
     <span>
       {index === 0
