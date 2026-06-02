@@ -407,17 +407,7 @@ const count = Object.values(owners)
             </div>
           )}
 
-          <div className="progress">
-            <div
-              className="progressFill"
-              style={{
-                width: `${percent}%`
-              }}
-            />
-          </div>
-
-          <p>
-            {count}/{SQUARE<div className="progressCard">
+          <div className="progressCard">
   <div className="progressTitle">
     VEGAS 26
   </div>
@@ -425,8 +415,16 @@ const count = Object.values(owners)
   <div className="progressCount">
     {count} / {SQUARES.length}
   </div>
-</div>S.length} Found ({percent}%)
-          </p>
+</div>
+
+<div className="progress">
+  <div
+    className="progressFill"
+    style={{
+      width: `${percent}%`
+    }}
+  />
+</div>
           
 <div className="grid">
   {SQUARES.map((square) => (
