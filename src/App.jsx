@@ -388,9 +388,7 @@ const count = Object.values(owners)
 </div>
 
       <div className="topButtons">
-        <button onClick={changePlayer}>
-          🚪 Cut Your Losses
-        </button>
+        
 
         {player === "Scott Jr" && (
   <button onClick={resetBoard}>
@@ -613,6 +611,13 @@ const count = Object.values(owners)
     </div>
   </div>
 )}
+
+      <{screen === "board" && (
+  <button onClick={changePlayer}>
+    🚪 Cut Your Losses
+  </button>
+)}
+      
       <div className="bottomNav">
         <button
   style={{
