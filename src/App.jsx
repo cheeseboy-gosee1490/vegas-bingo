@@ -45,7 +45,7 @@ const PLAYER_COLORS = {
 
 const SQUARES = [
   "Worst Sunburn Award",
-  "Elvis Impersonator",
+  "Fat Elvis",
   "Bachelor Party",
   "Bachelorette Party",
 
@@ -54,7 +54,7 @@ const SQUARES = [
   "Influencer Vlogging",
   "Waymo Chaos",
 
-  "Lamborghini",
+  "Lambo",
   "Selfie Stick",
   "Funniest Sleeping Photo",
   "Bride in Wedding Dress",
