@@ -94,6 +94,7 @@ export default function App() {
   const [screen, setScreen] = useState("board");
   const [leaderboard, setLeaderboard] = useState([]);
   const [owners, setOwners] = useState({});
+  const [activity, setActivity] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
 useEffect(() => {
@@ -404,6 +405,15 @@ const count = Object.values(owners)
         </div>
       )}
 
+      {screen === "activity" && (
+  <div className="leaderboard">
+    <h2>📢 Activity</h2>
+
+    <div className="leaderRow">
+      Activity feed coming next...
+    </div>
+  </div>
+)}
       {screen === "photos" && (
         <div className="leaderboard">
           <h2>📸 Photos</h2>
@@ -445,6 +455,14 @@ const count = Object.values(owners)
           🏆 Leaderboard
         </button>
 
+       <button
+  onClick={() =>
+    setScreen("activity")
+  }
+>
+  📢 Activity
+</button>
+        
         <button
           onClick={() =>
             setScreen("photos")
