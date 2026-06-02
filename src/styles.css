@@ -211,7 +211,7 @@ line-height: 1.1;
 
 /* TABLET */
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -227,7 +227,7 @@ font-weight: 700;
 
 /* PHONE */
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
