@@ -218,7 +218,20 @@ for (const activityDoc of snapshot.docs) {
   if (owner && owner !== player) {
     return;
   }
+const squareRef = doc(
+  db,
+  "squareOwners",
+  square
+);
 
+const squareSnap = await getDoc(squareRef);
+
+if (
+  squareSnap.exists() &&
+  squareSnap.data().owner !== player
+) {
+  return;
+}
   await setDoc(
   doc(db, "squareOwners", square),
   {
