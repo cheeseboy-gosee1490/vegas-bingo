@@ -202,22 +202,11 @@ line-height: 1.1;
 }
 
 .bottomNav {
-  position: sticky;
-  bottom: 0;
-
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  padding: 12px;
+  justify-content: center;
+  gap: 15px;
   margin-top: 35px;
-
-  background: rgba(11,11,11,0.95);
-  backdrop-filter: blur(10px);
-
-  border-top: 1px solid #333;
-
-  z-index: 100;
+  flex-wrap: wrap;
 }
 
 /* TABLET */
