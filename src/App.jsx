@@ -575,7 +575,15 @@ const count = Object.values(owners)
         textAlign: "center"
       }}
     >
-      <h2>{selectedSquare}</h2>
+      <h2
+  style={{
+    fontSize: "1.6rem",
+    marginBottom: "20px",
+    color: "#ff4fc3"
+  }}
+>
+  🎰 {selectedSquare}
+</h2>
 
      <div
   style={{
