@@ -75,9 +75,9 @@ const SQUARES = [
 ];
 
 export default function App() {
-  const [player, setPlayer] = useState(
-    localStorage.getItem("vegas-player") || ""
-  );
+ const [roomCode, setRoomCode] = useState(
+  localStorage.getItem("vegas-room") || ""
+);
 
   const [found, setFound] = useState({});
   const [screen, setScreen] = useState("board");
@@ -209,11 +209,33 @@ const count = Object.values(owners)
 
   const bingo = count >= 16;
 
-  if (!player) {
+  if (!player || !roomCode) {
     return (
       <div className="app">
         <h1>🎰 Vegas Bingo 2026</h1>
+<h2>Enter Room Code</h2>
 
+<input
+  type="text"
+  value={roomCode}
+  onChange={(e) =>
+    setRoomCode(e.target.value)
+  }
+  placeholder="VEGAS26"
+  style={{
+    display: "block",
+    width: "100%",
+    maxWidth: "300px",
+    margin: "0 auto 20px",
+    padding: "12px",
+    borderRadius: "10px",
+    border: "2px solid #ff4fc3",
+    background: "#111",
+    color: "white",
+    textAlign: "center",
+    fontSize: "1rem"
+  }}
+/>
         <h2>Select Player</h2>
 
         {PLAYERS.map((p) => (
@@ -221,12 +243,23 @@ const count = Object.values(owners)
             key={p}
             className="playerBtn"
             onClick={() => {
-              localStorage.setItem(
-                "vegas-player",
-                p
-              );
-              setPlayer(p);
-            }}
+  if (!roomCode.trim()) {
+    alert("Enter a room code");
+    return;
+  }
+
+  localStorage.setItem(
+    "vegas-player",
+    p
+  );
+
+  localStorage.setItem(
+    "vegas-room",
+    roomCode
+  );
+
+  setPlayer(p);
+}}
           >
             {p}
           </button>
