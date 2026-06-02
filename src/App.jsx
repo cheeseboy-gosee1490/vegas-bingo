@@ -150,25 +150,6 @@ useEffect(() => {
     loadPlayer();
   }, [player]);
 
-  useEffect(() => {
-    const savePlayer = async () => {
-      if (!player || !loaded) return;
-
-      await setDoc(
-        doc(db, "players", player),
-        {
-          found,
-          score:
-            Object.values(found).filter(Boolean)
-              .length
-        },
-        { merge: true }
-      );
-    };
-
-    savePlayer();
-  }, [found, player, loaded]);
-
   const toggleSquare = async (square) => {
   const owner = owners[square];
 
@@ -214,9 +195,9 @@ useEffect(() => {
     }
   };
 
-  const count =
-    Object.values(found).filter(Boolean)
-      .length;
+const count = Object.values(owners)
+  .filter((owner) => owner === player)
+  .length;
 
   const percent = Math.round(
     (count / SQUARES.length) * 100
