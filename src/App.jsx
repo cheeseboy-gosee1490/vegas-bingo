@@ -99,6 +99,9 @@ export default function App() {
   const [activity, setActivity] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
+  const [selectedSquare, setSelectedSquare] =
+  useState(null);
+
 // square ownership listener
 useEffect(() => {
   const unsubscribe = onSnapshot(
@@ -431,7 +434,7 @@ const count = Object.values(owners)
       : undefined
   }}
   onClick={() =>
-    toggleSquare(square)
+   setSelectedSquare(square)
   }
 >
   <div>
@@ -545,6 +548,58 @@ const count = Object.values(owners)
         </div>
       )}
 
+      {selectedSquare && (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.8)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 999
+    }}
+  >
+    <div
+      style={{
+        background: "#111",
+        border: "2px solid #ff4fc3",
+        borderRadius: "20px",
+        padding: "20px",
+        width: "90%",
+        maxWidth: "400px",
+        textAlign: "center"
+      }}
+    >
+      <h2>{selectedSquare}</h2>
+
+      <p>
+        Owner:{" "}
+        {owners[selectedSquare] || "Nobody"}
+      </p>
+
+      <button
+        onClick={() => {
+          toggleSquare(selectedSquare);
+          setSelectedSquare(null);
+        }}
+      >
+        Claim Square
+      </button>
+
+      <button
+        onClick={() =>
+          setSelectedSquare(null)
+        }
+        style={{
+          marginLeft: "10px"
+        }}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
       <div className="bottomNav">
         <button
           onClick={() =>
