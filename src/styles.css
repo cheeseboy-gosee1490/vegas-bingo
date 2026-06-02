@@ -11,6 +11,7 @@ body {
 
 .app {
   padding: 20px;
+  padding-bottom: 120px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -206,8 +207,10 @@ line-height: 1.1;
 }
 
 .bottomNav {
-  position: sticky;
+  position: fixed;
   bottom: 10px;
+  left: 20px;
+  right: 20px;
 
   display: flex;
   justify-content: space-around;
