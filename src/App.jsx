@@ -376,8 +376,12 @@ const count = Object.values(owners)
       <h1>🎰 Vegas Bingo 2026</h1>
 
       <div className="playerTag">
-        Playing as: <strong>{player}</strong>
-      </div>
+  Playing as:{" "}
+  <strong>
+    {player}
+    {player === "Scott Jr" && " 👑 Admin"}
+  </strong>
+</div>
 
       <div className="topButtons">
         <button onClick={changePlayer}>
@@ -386,8 +390,8 @@ const count = Object.values(owners)
 
         {player === "Scott Jr" && (
   <button onClick={resetBoard}>
-    Reset Board
-  </button>
+  👑 Admin Reset
+</button>
 )}
       </div>
 
