@@ -97,18 +97,35 @@ export default function App() {
   const [activity, setActivity] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
+// square ownership listener
+useEffect(() => {
+  ...
+}, []);
+
+// activity listener
 useEffect(() => {
   const unsubscribe = onSnapshot(
-    collection(db, "squareOwners"),
+    collection(db, "activity"),
     (snapshot) => {
-      const data = {};
+      const items = [];
 
       snapshot.forEach((docSnap) => {
-        data[docSnap.id] =
-          docSnap.data().owner;
+        items.push({
+          id: docSnap.id,
+          ...docSnap.data()
+        });
       });
 
-      setOwners(data);
+      items.sort((a, b) => {
+        const aTime =
+          a.timestamp?.seconds || 0;
+        const bTime =
+          b.timestamp?.seconds || 0;
+
+        return bTime - aTime;
+      });
+
+      setActivity(items);
     }
   );
 
