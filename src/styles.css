@@ -88,7 +88,16 @@ h2 {
 }
 
 .bottomNav button:hover {
-  background: #ff4fc3;
+  background: transparent;
+}
+
+.bottomNav button,
+.bottomNav button:focus,
+.bottomNav button:active,
+.bottomNav button:focus-visible {
+  background: transparent;
+  outline: none;
+  box-shadow: none;
 }
 
 .progress {
