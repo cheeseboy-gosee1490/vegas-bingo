@@ -279,3 +279,25 @@ font-weight: 700;
     gap: 10px;
   }
 }
+
+.logoutBtn {
+  width: 100%;
+
+  margin-top: 20px;
+  margin-bottom: 15px;
+
+  padding: 14px;
+
+  background: rgba(10,10,20,0.75);
+  backdrop-filter: blur(12px);
+
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+}
