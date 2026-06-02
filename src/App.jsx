@@ -220,37 +220,13 @@ for (const activityDoc of snapshot.docs) {
   }
 
   await setDoc(
-    doc(db, "squareOwners", square),
-    {
-      owner: player
-    }
-  );
-
-  // activity creation code
-
-  setOwners((prev) => ({
-    ...prev,
-    [square]: player
-  }));
-};
-    
-}
-    setOwners((prev) => {
-      const copy = { ...prev };
-      delete copy[square];
-      return copy;
-    });
-
-    return;
+  doc(db, "squareOwners", square),
+  {
+    owner: player
   }
+);
 
-  await setDoc(
-    doc(db, "squareOwners", square),
-    {
-      owner: player
-    }
-  );
-    await addDoc(
+await addDoc(
   collection(db, "activity"),
   {
     player,
