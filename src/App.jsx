@@ -632,9 +632,12 @@ const count = Object.values(owners)
 )}
       
       <div className="bottomNav">
-        <button
+      <button
   style={{
-    color: "#ff4fc3"
+    color:
+      screen === "board"
+        ? "#ff4fc3"
+        : "white"
   }}
   onClick={() =>
     setScreen("board")
@@ -643,7 +646,6 @@ const count = Object.values(owners)
   <div>🎰</div>
   <div>Board</div>
 </button>
-
         <button
           onClick={() =>
             setScreen("leaderboard")
