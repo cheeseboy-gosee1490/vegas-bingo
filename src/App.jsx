@@ -391,9 +391,12 @@ const count = Object.values(owners)
         
 
         {player === "Scott Jr" && (
-  <button onClick={resetBoard}>
-  👑 Admin Reset
-</button>
+  <button
+    className="logoutBtn"
+    onClick={resetBoard}
+  >
+    👑 Admin Reset
+  </button>
 )}
       </div>
 
