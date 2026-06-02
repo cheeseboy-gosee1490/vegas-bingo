@@ -276,23 +276,41 @@ const count = Object.values(owners)
           
 <div className="grid">
   {SQUARES.map((square) => (
-   <button
+<button
   key={square}
   className="square"
   style={{
-    background: owners[square]
+    borderColor: owners[square]
       ? PLAYER_COLORS[owners[square]]
       : undefined,
-    borderColor: owners[square]
-      ? "#fff"
+
+    boxShadow: owners[square]
+      ? `0 0 12px ${PLAYER_COLORS[owners[square]]}`
       : undefined
   }}
   onClick={() =>
     toggleSquare(square)
   }
 >
-      {square}
-    </button>
+  <div>
+    <div>{square}</div>
+
+    {owners[square] && (
+      <div
+        style={{
+          marginTop: "8px",
+          fontSize: "0.8rem",
+          color:
+            PLAYER_COLORS[
+              owners[square]
+            ]
+        }}
+      >
+        {owners[square]}
+      </div>
+    )}
+  </div>
+</button>
   ))}
 </div>
         </>
