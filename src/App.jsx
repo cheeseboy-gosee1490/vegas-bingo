@@ -100,27 +100,16 @@ export default function App() {
 // square ownership listener
 useEffect(() => {
   const unsubscribe = onSnapshot(
-    collection(db, "activity"),
+    collection(db, "squareOwners"),
     (snapshot) => {
-      const items = [];
+      const data = {};
 
       snapshot.forEach((docSnap) => {
-        items.push({
-          id: docSnap.id,
-          ...docSnap.data()
-        });
+        data[docSnap.id] =
+          docSnap.data().owner;
       });
 
-      items.sort((a, b) => {
-        const aTime =
-          a.timestamp?.seconds || 0;
-        const bTime =
-          b.timestamp?.seconds || 0;
-
-        return bTime - aTime;
-      });
-
-      setActivity(items);
+      setOwners(data);
     }
   );
 
@@ -260,8 +249,8 @@ await addDoc(
   }
 
   const snapshot = await getDocs(
-    collection(db, "squareOwners")
-  );
+  collection(db, "squareOwners")
+);
 
   for (const squareDoc of snapshot.docs) {
     if (
@@ -468,20 +457,31 @@ const count = Object.values(owners)
   <div className="leaderboard">
     <h2>📢 Activity</h2>
 
-    <div className="leaderRow">
-      Activity feed coming next...
-    </div>
+    {activity.map((item) => (
+      <div
+        key={item.id}
+        className="leaderRow"
+      >
+        <span
+          style={{
+            color:
+              PLAYER_COLORS[
+                item.player
+              ]
+          }}
+        >
+          ● {item.player}
+        </span>
+
+        <span>
+          {item.action === "claimed"
+            ? `claimed ${item.square}`
+            : `removed ${item.square}`}
+        </span>
+      </div>
+    ))}
   </div>
 )}
-      {screen === "photos" && (
-        <div className="leaderboard">
-          <h2>📸 Photos</h2>
-
-          <div className="leaderRow">
-            Photo uploads coming next...
-          </div>
-        </div>
-      )}
 
       {screen === "settings" && (
         <div className="leaderboard">
