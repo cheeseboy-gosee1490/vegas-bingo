@@ -521,8 +521,14 @@ const count = Object.values(owners)
     <h2>📸 Photos</h2>
 
     <div className="leaderRow">
-      Photo uploads coming soon...
-    </div>
+  <button>
+    📤 Upload Photo
+  </button>
+</div>
+
+<div className="leaderRow">
+  No photos uploaded yet.
+</div>
   </div>
 )}
       {screen === "settings" && (
