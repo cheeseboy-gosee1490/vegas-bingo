@@ -304,7 +304,7 @@ const count = Object.values(owners)
 
       <div className="topButtons">
         <button onClick={changePlayer}>
-          Change Player
+          🚪 Cut Your Losses
         </button>
 
         <button onClick={resetBoard}>
@@ -419,8 +419,8 @@ const count = Object.values(owners)
           <h2>⚙️ Settings</h2>
 
           <div className="leaderRow">
-            Room Code: VEGAS26
-          </div>
+  VIP Access Only
+</div>
 
           <div className="leaderRow">
             Players: 6
