@@ -117,6 +117,34 @@ h2 {
   );
 }
 
+.progressCard {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.progressTitle {
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+
+  text-shadow:
+    0 0 8px #ff4fc3,
+    0 0 16px #ff4fc3;
+}
+
+.progressCount {
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: #ffd54a;
+
+  text-shadow:
+    0 0 8px rgba(255,213,74,0.6),
+    0 0 18px rgba(255,213,74,0.3);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
