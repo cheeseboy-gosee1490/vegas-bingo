@@ -9,7 +9,9 @@ import {
   collection,
   getDocs,
   deleteDoc,
-  onSnapshot
+  onSnapshot,
+  query,
+  where
 } from "firebase/firestore";
 
 const PLAYERS = [
@@ -175,13 +177,27 @@ useEffect(() => {
     setLoaded(false);
   };
 
-  const resetBoard = () => {
+ const resetBoard = async () => {
+  if (
+    !window.confirm(
+      "Remove all your claimed squares?"
+    )
+  ) {
+    return;
+  }
+
+  const snapshot = await getDocs(
+    collection(db, "squareOwners")
+  );
+
+  for (const squareDoc of snapshot.docs) {
     if (
-      window.confirm("Reset all progress?")
+      squareDoc.data().owner === player
     ) {
-      setFound({});
+      await deleteDoc(squareDoc.ref);
     }
-  };
+  }
+};
 
 const count = Object.values(owners)
   .filter((owner) => owner === player)
