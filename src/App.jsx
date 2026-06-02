@@ -58,6 +58,7 @@ const SQUARES = [
   "Selfie Stick",
   "Funniest Sleeping Photo",
   "Bride in Wedding Dress",
+  "Wedding Chapel",
 
   "Groom in Wedding Attire",
   "Tattoo Shop",
@@ -83,6 +84,7 @@ const SQUARES = [
   "Claire Lookalike",
   "Ryan Lookalike",
   "Tackiest Souvenir ($10)"
+  
 ];
 
 export default function App() {
