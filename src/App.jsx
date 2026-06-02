@@ -671,20 +671,21 @@ const count = Object.values(owners)
 </button>
         
         <button
-          onClick={() =>
-            setScreen("photos")
-          }
-        >
-          📸 Photos
-        </button>
-
+  onClick={() =>
+    setScreen("photos")
+  }
+>
+  <div>📸</div>
+  <div>Photos</div>
+</button>
         <button
-          onClick={() =>
-            setScreen("settings")
-          }
-        >
-          ⚙️ Settings
-        </button>
+  onClick={() =>
+    setScreen("settings")
+  }
+>
+  <div>⚙️</div>
+  <div>More</div>
+</button>
       </div>
     </div>
   );
