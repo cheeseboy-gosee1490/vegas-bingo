@@ -134,7 +134,8 @@ line-height: 1.1;
   justify-content: center;
   text-align: center;
 
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .square:hover {
