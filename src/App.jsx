@@ -657,7 +657,8 @@ const count = Object.values(owners)
             setScreen("leaderboard")
           }
         >
-          🏆 Leaderboard
+          <div>🏆</div>
+          <div>Scores</div>
         </button>
 
        <button
@@ -665,7 +666,8 @@ const count = Object.values(owners)
     setScreen("activity")
   }
 >
-  📢 Activity
+  <div>📢</div>
+  <div>Feed</div>
 </button>
         
         <button
