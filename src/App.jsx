@@ -612,7 +612,7 @@ const count = Object.values(owners)
   </div>
 )}
 
-      <{screen === "board" && (
+      {screen === "board" && (
   <button onClick={changePlayer}>
     🚪 Cut Your Losses
   </button>
