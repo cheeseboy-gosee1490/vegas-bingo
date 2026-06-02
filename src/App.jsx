@@ -644,12 +644,13 @@ const count = Object.values(owners)
 )}
       <div className="bottomNav">
         <button
-          onClick={() =>
-            setScreen("board")
-          }
-        >
-          🎰 Board
-        </button>
+  onClick={() =>
+    setScreen("board")
+  }
+>
+  <div>🎰</div>
+  <div>Board</div>
+</button>
 
         <button
           onClick={() =>
