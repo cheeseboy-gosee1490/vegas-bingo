@@ -193,7 +193,18 @@ const toggleSquare = async (square) => {
       doc(db, "squareOwners", square)
     );
 
-    // activity deletion code
+    const q = query(
+  collection(db, "activity"),
+  where("player", "==", player),
+  where("square", "==", square),
+  where("action", "==", "claimed")
+);
+
+const snapshot = await getDocs(q);
+
+for (const activityDoc of snapshot.docs) {
+  await deleteDoc(activityDoc.ref);
+}
 
     setOwners((prev) => {
       const copy = { ...prev };
@@ -223,17 +234,6 @@ const toggleSquare = async (square) => {
   }));
 };
     
-const q = query(
-  collection(db, "activity"),
-  where("player", "==", player),
-  where("square", "==", square),
-  where("action", "==", "claimed")
-);
-
-const snapshot = await getDocs(q);
-
-for (const activityDoc of snapshot.docs) {
-  await deleteDoc(activityDoc.ref);
 }
     setOwners((prev) => {
       const copy = { ...prev };
