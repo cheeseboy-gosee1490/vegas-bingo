@@ -185,13 +185,44 @@ useEffect(() => {
     loadPlayer();
   }, [player]);
 
-  const toggleSquare = async (square) => {
+const toggleSquare = async (square) => {
   const owner = owners[square];
 
   if (owner === player) {
     await deleteDoc(
       doc(db, "squareOwners", square)
     );
+
+    // activity deletion code
+
+    setOwners((prev) => {
+      const copy = { ...prev };
+      delete copy[square];
+      return copy;
+    });
+
+    return;
+  }
+
+  if (owner && owner !== player) {
+    return;
+  }
+
+  await setDoc(
+    doc(db, "squareOwners", square),
+    {
+      owner: player
+    }
+  );
+
+  // activity creation code
+
+  setOwners((prev) => ({
+    ...prev,
+    [square]: player
+  }));
+};
+    
 const q = query(
   collection(db, "activity"),
   where("player", "==", player),
