@@ -59,7 +59,6 @@ const SQUARES = [
   "Funniest Sleeping Photo",
   "Bride in Wedding Dress",
   "Wedding Chapel",
-
   "Groom in Wedding Attire",
   "Tattoo Shop",
   "Celtic Shirt",
