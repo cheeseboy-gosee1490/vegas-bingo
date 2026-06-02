@@ -577,11 +577,38 @@ const count = Object.values(owners)
     >
       <h2>{selectedSquare}</h2>
 
-      <p>
-        Owner:{" "}
-        {owners[selectedSquare] || "Nobody"}
-      </p>
+     <div
+  style={{
+    fontSize: "1.1rem",
+    fontWeight: "bold",
+    marginBottom: "10px",
+    color: owners[selectedSquare]
+      ? PLAYER_COLORS[
+          owners[selectedSquare]
+        ]
+      : "#aaa"
+  }}
+>
+  👤 {owners[selectedSquare] || "Nobody"}
+</div>
+<p
+  style={{
+    opacity: 0.7,
+    marginBottom: "20px"
+  }}
+>
+  📸 No evidence uploaded yet
+</p>
 
+<button
+  disabled
+  style={{
+    opacity: 0.5,
+    marginBottom: "15px"
+  }}
+>
+  📷 View Evidence
+</button>
       {!owners[selectedSquare] && (
   <button
     onClick={() => {
