@@ -669,23 +669,7 @@ const count = Object.values(owners)
   <div>📢</div>
   <div>Feed</div>
 </button>
-        
-        <button
-  onClick={() =>
-    setScreen("photos")
-  }
->
-  <div>📸</div>
-  <div>Photos</div>
-</button>
-        <button
-  onClick={() =>
-    setScreen("settings")
-  }
->
-  <div>⚙️</div>
-  <div>More</div>
-</button>
+      
       </div>
     </div>
   );
