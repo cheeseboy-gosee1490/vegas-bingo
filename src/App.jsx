@@ -516,7 +516,15 @@ const count = Object.values(owners)
     ))}
   </div>
 )}
+{screen === "photos" && (
+  <div className="leaderboard">
+    <h2>📸 Photos</h2>
 
+    <div className="leaderRow">
+      Photo uploads coming soon...
+    </div>
+  </div>
+)}
       {screen === "settings" && (
         <div className="leaderboard">
           <h2>⚙️ Settings</h2>
