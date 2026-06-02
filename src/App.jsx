@@ -388,17 +388,16 @@ const count = Object.values(owners)
 </div>
 
       <div className="topButtons">
-        
-
-        {player === "Scott Jr" && (
-  <button
-    className="logoutBtn"
-    onClick={resetBoard}
-  >
-    👑 Admin Reset
-  </button>
-)}
-      </div>
+  {player === "Scott Jr" &&
+    screen === "board" && (
+      <button
+        className="logoutBtn"
+        onClick={resetBoard}
+      >
+        👑 Admin Reset
+      </button>
+  )}
+</div>
 
       {screen === "board" && (
         <>
@@ -477,62 +476,45 @@ const count = Object.values(owners)
         <div className="leaderboard">
           <h2>🏆 Leaderboard</h2>
 
-          {leaderboard.map(
-            (entry, index) => (
-             <div
-  key={entry.name}
-  className="leaderRow"
-  style={
-    index === 0
-      ? {
-          border: "1px solid #fbbf24",
-          boxShadow:
-            "0 0 12px rgba(251,191,36,0.4)"
-        }
-      : index === 1
-      ? {
-          border: "1px solid #cbd5e1",
-          boxShadow:
-            "0 0 10px rgba(203,213,225,0.3)"
-        }
-      : {}
-  }
->
-  <span>
-    {index === 0
-      ? "🥇 "
-      : index === 1
-      ? "🥈 "
-      : index === 2
-      ? "🥉 "
-      : `${index + 1}. `}
-    {entry.name}
-  </span>
+        {leaderboard.map((entry, index) => (
+  <div
+    key={entry.name}
+    className="leaderRow"
+    style={
+      index === 0
+        ? {
+            border: "1px solid #fbbf24",
+            boxShadow:
+              "0 0 12px rgba(251,191,36,0.4)"
+          }
+        : index === 1
+        ? {
+            border: "1px solid #cbd5e1",
+            boxShadow:
+              "0 0 10px rgba(203,213,225,0.3)"
+          }
+        : {}
+    }
+  >
+    <span>
+      {index === 0
+        ? "🥇 "
+        : index === 1
+        ? "🥈 "
+        : index === 2
+        ? "🥉 "
+        : `${index + 1}. `}
+      {entry.name}
+    </span>
 
-  <strong>
-    {entry.score}
-  </strong>
-</div>
-  {index === 0
-    ? "🥇 "
-    : index === 1
-    ? "🥈 "
-    : index === 2
-    ? "🥉 "
-    : `${index + 1}. `}
-  {entry.name}
-</span>
+    <strong>{entry.score}</strong>
+  </div>
+))}
 
-                <strong>
-                  {entry.score}
-                </strong>
-              </div>
-            )
-          )}
         </div>
       )}
 
-      {screen === "activity" && (
+{screen === "activity" && (
   <div className="leaderboard">
     <h2>📢 Activity</h2>
 
