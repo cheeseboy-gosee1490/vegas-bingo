@@ -11,7 +11,9 @@ import {
   getDocs,
   deleteDoc,
   onSnapshot,
-  serverTimestamp
+  serverTimestamp,
+  query,
+  where
 } from "firebase/firestore";
 
 const PLAYERS = [
