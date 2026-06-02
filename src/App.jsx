@@ -615,6 +615,9 @@ const count = Object.values(owners)
 )}
       <div className="bottomNav">
         <button
+  style={{
+    color: "#ff4fc3"
+  }}
   onClick={() =>
     setScreen("board")
   }
