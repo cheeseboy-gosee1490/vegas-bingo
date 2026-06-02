@@ -75,9 +75,13 @@ const SQUARES = [
 ];
 
 export default function App() {
- const [roomCode, setRoomCode] = useState(
-  localStorage.getItem("vegas-room") || ""
-);
+  const [player, setPlayer] = useState(
+    localStorage.getItem("vegas-player") || ""
+  );
+
+  const [roomCode, setRoomCode] = useState(
+    localStorage.getItem("vegas-room") || ""
+  );
 
   const [found, setFound] = useState({});
   const [screen, setScreen] = useState("board");
@@ -171,11 +175,12 @@ useEffect(() => {
 };
 
   const changePlayer = () => {
-    localStorage.removeItem("vegas-player");
-    setPlayer("");
-    setFound({});
-    setLoaded(false);
-  };
+  localStorage.removeItem("vegas-player");
+  localStorage.removeItem("vegas-room");
+
+  setPlayer("");
+  setRoomCode("");
+};
 
  const resetBoard = async () => {
   if (
