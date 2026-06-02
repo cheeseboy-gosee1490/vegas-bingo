@@ -101,32 +101,20 @@ useEffect(() => {
   return () => unsubscribe();
 }, []);
   
-  useEffect(() => {
-    const loadLeaderboard = async () => {
-      const snapshot = await getDocs(
-        collection(db, "players")
-      );
+ useEffect(() => {
+  const scores = PLAYERS.map((name) => ({
+    name,
+    score: Object.values(owners)
+      .filter((owner) => owner === name)
+      .length
+  }));
 
-      const scores = [];
+  scores.sort(
+    (a, b) => b.score - a.score
+  );
 
-      snapshot.forEach((playerDoc) => {
-        const data = playerDoc.data();
-
-        scores.push({
-          name: playerDoc.id,
-          score: data.score || 0
-        });
-      });
-
-      scores.sort(
-        (a, b) => b.score - a.score
-      );
-
-      setLeaderboard(scores);
-    };
-
-    loadLeaderboard();
-  }, [found]);
+  setLeaderboard(scores);
+}, [owners]);
 
   useEffect(() => {
     const loadPlayer = async () => {
