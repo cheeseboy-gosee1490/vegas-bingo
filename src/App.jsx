@@ -647,15 +647,27 @@ const count = Object.values(owners)
   <div>Board</div>
 </button>
         <button
-          onClick={() =>
-            setScreen("leaderboard")
-          }
-        >
+  style={{
+    color:
+      screen === "leaderboard"
+        ? "#22c55e"
+        : "white"
+  }}
+  onClick={() =>
+    setScreen("leaderboard")
+  }
+>
           <div>🏆</div>
           <div>Scores</div>
         </button>
 
        <button
+  style={{
+    color:
+      screen === "activity"
+        ? "#f97316"
+        : "white"
+  }}
   onClick={() =>
     setScreen("activity")
   }
