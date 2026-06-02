@@ -524,35 +524,6 @@ const count = Object.values(owners)
     ))}
   </div>
 )}
-{screen === "photos" && (
-  <div className="leaderboard">
-    <h2>📸 Photos</h2>
-
-    <div className="leaderRow">
-  <button>
-    📤 Upload Photo
-  </button>
-</div>
-
-<div className="leaderRow">
-  No photos uploaded yet.
-</div>
-  </div>
-)}
-      {screen === "settings" && (
-        <div className="leaderboard">
-          <h2>⚙️ Settings</h2>
-
-          <div className="leaderRow">
-  VIP Access Only
-</div>
-
-          <div className="leaderRow">
-            Players: 6
-          </div>
-        </div>
-      )}
-
       {selectedSquare && (
   <div
     style={{
