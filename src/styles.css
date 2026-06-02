@@ -121,8 +121,9 @@ h2 {
   cursor: pointer;
   transition: 0.2s;
 
-  font-size: 1.1rem;
-  line-height: 1.2;
+  font-size: 1.3rem;
+font-weight: 700;
+line-height: 1.1;
 
   display: flex;
   align-items: center;
@@ -217,7 +218,8 @@ h2 {
 
   .square {
     min-height: 115px;
-    font-size: 1rem;
+    font-size: 1.15rem;
+font-weight: 700;
     padding: 10px;
     line-height: 1.15;
   }
@@ -232,7 +234,8 @@ h2 {
 
   .square {
     min-height: 105px;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+font-weight: 700;
     padding: 8px;
     line-height: 1.15;
   }
