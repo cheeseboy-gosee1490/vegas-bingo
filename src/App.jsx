@@ -582,14 +582,16 @@ const count = Object.values(owners)
         {owners[selectedSquare] || "Nobody"}
       </p>
 
-      <button
-        onClick={() => {
-          toggleSquare(selectedSquare);
-          setSelectedSquare(null);
-        }}
-      >
-        Claim Square
-      </button>
+      {!owners[selectedSquare] && (
+  <button
+    onClick={() => {
+      toggleSquare(selectedSquare);
+      setSelectedSquare(null);
+    }}
+  >
+    Claim Square
+  </button>
+)}
 
       <button
         onClick={() =>
