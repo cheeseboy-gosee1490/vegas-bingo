@@ -103,6 +103,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
+  width: 100%;
 }
 
 .square {
@@ -251,8 +252,8 @@ font-weight: 700;
 
 @media (max-width: 900px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
   .square {
     min-height: 105px;
