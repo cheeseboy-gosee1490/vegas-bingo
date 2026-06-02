@@ -278,12 +278,15 @@ await addDoc(
 );
 
   for (const squareDoc of snapshot.docs) {
-    if (
-      squareDoc.data().owner === player
-    ) {
-      await deleteDoc(squareDoc.ref);
-    }
-  }
+  await deleteDoc(squareDoc.ref);
+}
+   const activitySnapshot = await getDocs(
+  collection(db, "activity")
+);
+
+for (const activityDoc of activitySnapshot.docs) {
+  await deleteDoc(activityDoc.ref);
+}
 };
 
 const count = Object.values(owners)
@@ -381,9 +384,11 @@ const count = Object.values(owners)
           🚪 Cut Your Losses
         </button>
 
-        <button onClick={resetBoard}>
-          Reset Board
-        </button>
+        {player === "Scott Jr" && (
+  <button onClick={resetBoard}>
+    Reset Board
+  </button>
+)}
       </div>
 
       {screen === "board" && (
