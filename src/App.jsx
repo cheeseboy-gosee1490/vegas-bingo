@@ -433,9 +433,13 @@ const count = Object.values(owners)
       ? `0 0 12px ${PLAYER_COLORS[owners[square]]}`
       : undefined
   }}
-  onClick={() =>
-   setSelectedSquare(square)
+ onClick={() => {
+  if (owners[square] === player) {
+    toggleSquare(square);
+  } else {
+    setSelectedSquare(square);
   }
+}}
 >
   <div>
     <div>{square}</div>
