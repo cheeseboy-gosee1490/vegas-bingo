@@ -481,8 +481,15 @@ const count = Object.values(owners)
                 className="leaderRow"
               >
                 <span>
-                  {index + 1}. {entry.name}
-                </span>
+  {index === 0
+    ? "🥇 "
+    : index === 1
+    ? "🥈 "
+    : index === 2
+    ? "🥉 "
+    : `${index + 1}. `}
+  {entry.name}
+</span>
 
                 <strong>
                   {entry.score}
