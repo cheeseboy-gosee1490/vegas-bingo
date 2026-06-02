@@ -479,25 +479,40 @@ const count = Object.values(owners)
 
           {leaderboard.map(
             (entry, index) => (
-              <div
+             <div
   key={entry.name}
   className="leaderRow"
   style={
-  index === 0
-    ? {
-        border: "1px solid #fbbf24",
-        boxShadow:
-          "0 0 12px rgba(251,191,36,0.4)"
-      }
-    : index === 1
-    ? {
-        border: "1px solid #cbd5e1",
-        boxShadow:
-          "0 0 10px rgba(203,213,225,0.3)"
-      }
-    : {}
-}
-                <span>
+    index === 0
+      ? {
+          border: "1px solid #fbbf24",
+          boxShadow:
+            "0 0 12px rgba(251,191,36,0.4)"
+        }
+      : index === 1
+      ? {
+          border: "1px solid #cbd5e1",
+          boxShadow:
+            "0 0 10px rgba(203,213,225,0.3)"
+        }
+      : {}
+  }
+>
+  <span>
+    {index === 0
+      ? "🥇 "
+      : index === 1
+      ? "🥈 "
+      : index === 2
+      ? "🥉 "
+      : `${index + 1}. `}
+    {entry.name}
+  </span>
+
+  <strong>
+    {entry.score}
+  </strong>
+</div>
   {index === 0
     ? "🥇 "
     : index === 1
