@@ -296,25 +296,25 @@ const count = Object.values(owners)
     <div>{square}</div>
 
     {owners[square] && (
-     <div
-  style={{
-    marginTop: "8px",
-    fontSize: "0.9rem",
-    fontWeight: "bold",
-    color:
-      PLAYER_COLORS[
-        owners[square]
-      ],
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "4px"
-  }}
->
-  <span>👤</span>
-  <span>{owners[square]}</span>
-</div>
-    )}
+  <div
+    style={{
+      marginTop: "8px",
+      fontSize: "0.95rem",
+      fontWeight: "bold",
+      color:
+        PLAYER_COLORS[
+          owners[square]
+        ],
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "5px"
+    }}
+  >
+    <span>●</span>
+    <span>{owners[square]}</span>
+  </div>
+)}
   </div>
 </button>
   ))}
