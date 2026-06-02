@@ -6,12 +6,12 @@ import {
   doc,
   getDoc,
   setDoc,
+  addDoc,
   collection,
   getDocs,
   deleteDoc,
   onSnapshot,
-  query,
-  where
+  serverTimestamp
 } from "firebase/firestore";
 
 const PLAYERS = [
@@ -159,7 +159,15 @@ useEffect(() => {
     await deleteDoc(
       doc(db, "squareOwners", square)
     );
-
+await addDoc(
+  collection(db, "activity"),
+  {
+    player,
+    square,
+    action: "removed",
+    timestamp: serverTimestamp()
+  }
+);
     setOwners((prev) => {
       const copy = { ...prev };
       delete copy[square];
@@ -175,6 +183,15 @@ useEffect(() => {
       owner: player
     }
   );
+    await addDoc(
+  collection(db, "activity"),
+  {
+    player,
+    square,
+    action: "claimed",
+    timestamp: serverTimestamp()
+  }
+);
 
   setOwners((prev) => ({
     ...prev,
