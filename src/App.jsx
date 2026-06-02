@@ -23,6 +23,15 @@ const PLAYERS = [
   "Ryan"
 ];
 
+const VALID_PLAYERS = {
+  "scott jr": "Scott Jr",
+  "scott sr": "Scott Sr",
+  georgia: "Georgia",
+  irene: "Irene",
+  claire: "Claire",
+  ryan: "Ryan"
+};
+
 const PLAYER_COLORS = {
   "Scott Jr": "#22c55e",
   "Scott Sr": "#f97316",
@@ -79,9 +88,7 @@ export default function App() {
     localStorage.getItem("vegas-player") || ""
   );
 
-  const [roomCode, setRoomCode] = useState(
-    localStorage.getItem("vegas-room") || ""
-  );
+  const [guestName, setGuestName] = useState("");
 
   const [found, setFound] = useState({});
   const [screen, setScreen] = useState("board");
@@ -175,11 +182,12 @@ useEffect(() => {
 };
 
   const changePlayer = () => {
-  localStorage.removeItem("vegas-player");
-  localStorage.removeItem("vegas-room");
+  localStorage.removeItem(
+    "vegas-player"
+  );
 
   setPlayer("");
-  setRoomCode("");
+  setGuestName("");
 };
 
  const resetBoard = async () => {
@@ -214,64 +222,77 @@ const count = Object.values(owners)
 
   const bingo = count >= 16;
 
-  if (!player || !roomCode) {
-    return (
-      <div className="app">
-        <h1>🎰 Vegas Bingo 2026</h1>
-<h2>Enter Room Code</h2>
+  if (!player) {
+  return (
+    <div className="app">
+      <h1>🎰 Vegas Bingo 2026</h1>
 
-<input
-  type="text"
-  value={roomCode}
-  onChange={(e) =>
-    setRoomCode(e.target.value)
-  }
-  placeholder="VEGAS26"
-  style={{
-    display: "block",
-    width: "100%",
-    maxWidth: "300px",
-    margin: "0 auto 20px",
-    padding: "12px",
-    borderRadius: "10px",
-    border: "2px solid #ff4fc3",
-    background: "#111",
-    color: "white",
-    textAlign: "center",
-    fontSize: "1rem"
-  }}
-/>
-        <h2>Select Player</h2>
+      <h2>👤 VIP Guest List</h2>
 
-        {PLAYERS.map((p) => (
-          <button
-            key={p}
-            className="playerBtn"
-            onClick={() => {
-  if (!roomCode.trim()) {
-    alert("Enter a room code");
-    return;
-  }
+      <p
+        style={{
+          textAlign: "center",
+          marginBottom: "20px"
+        }}
+      >
+        Are you on the list?
+      </p>
 
-  localStorage.setItem(
-    "vegas-player",
-    p
+      <input
+        type="text"
+        value={guestName}
+        onChange={(e) =>
+          setGuestName(e.target.value)
+        }
+        placeholder="Type your name..."
+        style={{
+          display: "block",
+          width: "100%",
+          maxWidth: "350px",
+          margin: "0 auto 20px",
+          padding: "14px",
+          borderRadius: "12px",
+          border: "2px solid #ff4fc3",
+          background: "#111",
+          color: "white",
+          textAlign: "center",
+          fontSize: "1rem"
+        }}
+      />
+
+      <button
+        className="playerBtn"
+        onClick={() => {
+          const name =
+            guestName
+              .trim()
+              .toLowerCase();
+
+          const matchedPlayer =
+            VALID_PLAYERS[name];
+
+          if (!matchedPlayer) {
+            alert(
+              "🚫 Sorry, you're not on the guest list."
+            );
+            return;
+          }
+
+          localStorage.setItem(
+            "vegas-player",
+            matchedPlayer
+          );
+
+          setPlayer(
+            matchedPlayer
+          );
+        }}
+      >
+        🎲 Enter Casino
+      </button>
+    </div>
   );
-
-  localStorage.setItem(
-    "vegas-room",
-    roomCode
-  );
-
-  setPlayer(p);
-}}
-          >
-            {p}
-          </button>
-        ))}
-      </div>
-    );
-  }
+}
 
   return (
     <div className="app">
