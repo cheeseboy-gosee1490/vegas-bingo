@@ -387,18 +387,6 @@ const count = Object.values(owners)
   <strong>{player}</strong>
 </div>
 
-      <div className="topButtons">
-  {player === "Scott Jr" &&
-    screen === "board" && (
-      <button
-        className="logoutBtn"
-        onClick={resetBoard}
-      >
-        👑 Admin Reset
-      </button>
-  )}
-</div>
-
       {screen === "board" && (
         <>
           {bingo && (
@@ -642,12 +630,23 @@ const count = Object.values(owners)
 )}
 
      {screen === "board" && (
-  <button
-    className="logoutBtn"
-    onClick={changePlayer}
-  >
-    🚪 Cut Your Losses
-  </button>
+  <>
+    <button
+      className="logoutBtn"
+      onClick={changePlayer}
+    >
+      🚪 Cut Your Losses
+    </button>
+
+    {player === "Scott Jr" && (
+      <button
+        className="logoutBtn"
+        onClick={resetBoard}
+      >
+        👑 Admin Reset
+      </button>
+    )}
+  </>
 )}
       
       <div className="bottomNav">
