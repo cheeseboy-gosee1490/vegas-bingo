@@ -718,7 +718,7 @@ const bingo = playerCount >= 16;
     setScreen("activity")
   }
 >
-  <div>📢</div>
+  <Bell size={26} />
   <div>Feed</div>
 </button>
       
