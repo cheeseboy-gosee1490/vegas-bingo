@@ -415,6 +415,15 @@ const bingo = playerCount >= 16;
 >
   {remaining} Remaining
 </div>
+
+          <div className="progress">
+  <div
+    className="progressFill"
+    style={{
+      width: `${percent}%`
+    }}
+  />
+</div>
           
 <div className="grid">
   {SQUARES.map((square) => (
