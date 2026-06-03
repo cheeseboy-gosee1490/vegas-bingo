@@ -20,7 +20,7 @@ import {
   LayoutGrid,
   Trophy,
   Bell,
-  LogOut,
+  DoorOpen,
   Crown
 } from "lucide-react";
 
@@ -665,7 +665,7 @@ const bingo = playerCount >= 16;
   className="logoutBtn"
   onClick={changePlayer}
 >
-  <LogOut size={18} />
+  <DoorOpen size={18} />
   Cut Your Losses
 </button>
 
