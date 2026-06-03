@@ -670,11 +670,11 @@ const bingo = playerCount >= 16;
 
     {player === "Scott Jr" && (
       <button
-        className="logoutBtn"
-        onClick={resetBoard}
-      >
-        👑 Admin Reset
-      </button>
+  className="logoutBtn"
+  onClick={resetBoard}
+>
+  ADMIN RESET
+</button>
     )}
   </>
 )}
