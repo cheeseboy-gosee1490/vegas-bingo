@@ -404,6 +404,7 @@ const bingo = playerCount >= 16;
 
       {screen === "board" && (
         <>
+          <div style={{ marginTop: "20px" }}>
           {bingo && (
             <div className="bingoBanner">
               🎉 BINGO ACHIEVED! 🎉
@@ -661,6 +662,7 @@ const bingo = playerCount >= 16;
 
      {screen === "board" && (
   <>
+    <div style={{ marginTop: "20px" }}>
     <button
   className="logoutBtn"
   onClick={changePlayer}
@@ -676,6 +678,8 @@ const bingo = playerCount >= 16;
   ADMIN RESET
 </button>
     )}
+
+   </div>
   </>
 )}
       
