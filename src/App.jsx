@@ -665,8 +665,7 @@ const bingo = playerCount >= 16;
   className="logoutBtn"
   onClick={changePlayer}
 >
-  <DoorOpen size={18} />
-  Cut Your Losses
+  CUT YOUR LOSSES
 </button>
 
     {player === "Scott Jr" && (
