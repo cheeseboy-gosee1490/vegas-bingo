@@ -19,7 +19,9 @@ import {
 import {
   LayoutGrid,
   Trophy,
-  Bell
+  Bell,
+  LogOut,
+  Crown
 } from "lucide-react";
 
 const PLAYERS = [
