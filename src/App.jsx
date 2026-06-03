@@ -689,7 +689,7 @@ const bingo = playerCount >= 16;
     setScreen("board")
   }
 >
-  <div>🎰</div>
+  <LayoutGrid size={22} />
   <div>Board</div>
 </button>
         <button
