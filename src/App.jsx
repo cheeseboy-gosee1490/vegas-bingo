@@ -703,7 +703,7 @@ const bingo = playerCount >= 16;
     setScreen("leaderboard")
   }
 >
-          <div>🏆</div>
+          <Trophy size={26} />
           <div>Scores</div>
         </button>
 
