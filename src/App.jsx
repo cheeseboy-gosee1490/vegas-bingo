@@ -293,13 +293,14 @@ for (const activityDoc of activitySnapshot.docs) {
 }
 };
 
-const count = Object.values(owners)
-  .filter((owner) => owner === player)
-  .length;
+const totalClaimed = Object.keys(owners).length;
 
-  const percent = Math.round(
-    (count / SQUARES.length) * 100
-  );
+const percent = Math.round(
+  (totalClaimed / SQUARES.length) * 100
+);
+
+const remaining =
+  SQUARES.length - totalClaimed;
 
   const bingo = count >= 16;
 
@@ -397,19 +398,18 @@ const count = Object.values(owners)
             </div>
           )}
 
-          <div className="progressCard">
-  <div className="progressCount">
-    {count} / {SQUARES.length}
-  </div>
+          <div className="progressCount">
+  {totalClaimed} / {SQUARES.length} Claimed
 </div>
 
-<div className="progress">
-  <div
-    className="progressFill"
-    style={{
-      width: `${percent}%`
-    }}
-  />
+<div
+  style={{
+    fontSize: "0.9rem",
+    opacity: 0.7,
+    marginTop: "4px"
+  }}
+>
+  {remaining} Remaining
 </div>
           
 <div className="grid">
