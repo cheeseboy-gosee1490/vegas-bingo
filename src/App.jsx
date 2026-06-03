@@ -404,7 +404,6 @@ const bingo = playerCount >= 16;
 
       {screen === "board" && (
         <>
-          <div style={{ marginTop: "20px" }}>
           {bingo && (
             <div className="bingoBanner">
               🎉 BINGO ACHIEVED! 🎉
@@ -679,7 +678,6 @@ const bingo = playerCount >= 16;
 </button>
     )}
 
-   </div>
   </>
 )}
       
