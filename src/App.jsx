@@ -662,11 +662,12 @@ const bingo = playerCount >= 16;
      {screen === "board" && (
   <>
     <button
-      className="logoutBtn"
-      onClick={changePlayer}
-    >
-      🚪 Cut Your Losses
-    </button>
+  className="logoutBtn"
+  onClick={changePlayer}
+>
+  <LogOut size={18} />
+  Cut Your Losses
+</button>
 
     {player === "Scott Jr" && (
       <button
