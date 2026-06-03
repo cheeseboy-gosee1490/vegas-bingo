@@ -402,20 +402,6 @@ const bingo = playerCount >= 16;
             </div>
           )}
 
-          <div className="progressCount">
-  {totalClaimed} / {SQUARES.length} Claimed
-</div>
-
-<div
-  style={{
-    fontSize: "0.9rem",
-    opacity: 0.7,
-    marginTop: "4px"
-  }}
->
-  {remaining} Remaining
-</div>
-
           <div className="progress">
   <div
     className="progressFill"
@@ -423,6 +409,27 @@ const bingo = playerCount >= 16;
       width: `${percent}%`
     }}
   />
+</div>
+
+<div
+  style={{
+    textAlign: "center",
+    marginTop: "10px",
+    marginBottom: "20px"
+  }}
+>
+  <div className="progressCount">
+    {totalClaimed} / {SQUARES.length} Claimed
+  </div>
+
+  <div
+    style={{
+      fontSize: "0.9rem",
+      opacity: 0.7
+    }}
+  >
+    {remaining} Remaining
+  </div>
 </div>
           
 <div className="grid">
