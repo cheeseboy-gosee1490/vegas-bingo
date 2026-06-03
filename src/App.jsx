@@ -16,6 +16,12 @@ import {
   where
 } from "firebase/firestore";
 
+import {
+  LayoutGrid,
+  Trophy,
+  Bell
+} from "lucide-react";
+
 const PLAYERS = [
   "Scott Jr",
   "Scott Sr",
