@@ -389,9 +389,9 @@ const bingo = playerCount >= 16;
 </div>
 
       <div className="playerTag">
-  Playing as:
-  <br />
-  <strong>{player}</strong>
+  <strong>
+    PLAYING AS {player.toUpperCase()}
+  </strong>
 </div>
 
       {screen === "board" && (
