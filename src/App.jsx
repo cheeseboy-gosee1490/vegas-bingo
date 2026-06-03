@@ -678,6 +678,7 @@ const bingo = playerCount >= 16;
 </button>
     )}
 
+       </div>
   </>
 )}
       
