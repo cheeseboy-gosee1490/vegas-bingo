@@ -408,7 +408,6 @@ const count = Object.values(owners)
           )}
 
           <div className="progressCard">
-  <div className="progressCard">
   <div className="progressCount">
     {count} / {SQUARES.length}
   </div>
