@@ -379,7 +379,7 @@ const count = Object.values(owners)
 
   return (
     <div className="app">
-      <h1>🎰 Vegas Bingo 2026</h1>
+      <h1>VEGAS 26</h1>
 
       <div className="playerTag">
   Playing as:
