@@ -414,11 +414,6 @@ const count = Object.values(owners)
   </div>
 </div>
 
-  <div className="progressCount">
-    {count} / {SQUARES.length}
-  </div>
-</div>
-
 <div className="progress">
   <div
     className="progressFill"
