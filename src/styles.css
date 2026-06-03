@@ -34,6 +34,7 @@ h2 {
   text-align: center;
   font-size: 1.3rem;
   margin-bottom: 20px;
+  white-space: nowrap;
 }
 
 .playerBtn {
