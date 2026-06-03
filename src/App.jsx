@@ -302,7 +302,11 @@ const percent = Math.round(
 const remaining =
   SQUARES.length - totalClaimed;
 
-  const bingo = count >= 16;
+  const playerCount = Object.values(owners)
+  .filter((owner) => owner === player)
+  .length;
+
+const bingo = playerCount >= 16;
 
   if (!player) {
   return (
