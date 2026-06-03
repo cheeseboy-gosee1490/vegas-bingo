@@ -306,7 +306,9 @@ const count = Object.values(owners)
   if (!player) {
   return (
     <div className="app">
-      <h1>🎰 Vegas Bingo 2026</h1>
+    <div className="progressTitle">
+      VEGAS 26
+    </div>
 
       <h2>👤 VIP Guest List</h2>
 
@@ -380,11 +382,9 @@ const count = Object.values(owners)
       <h1>🎰 Vegas Bingo 2026</h1>
 
       <div className="playerTag">
-  Playing as:{" "}
-  <strong>
-    {player}
-    {player === "Scott Jr" && " 👑 Admin"}
-  </strong>
+  Playing as:
+  <br />
+  <strong>{player}</strong>
 </div>
 
       <div className="topButtons">
@@ -408,9 +408,11 @@ const count = Object.values(owners)
           )}
 
           <div className="progressCard">
-  <div className="progressTitle">
-    VEGAS 26
+  <div className="progressCard">
+  <div className="progressCount">
+    {count} / {SQUARES.length}
   </div>
+</div>
 
   <div className="progressCount">
     {count} / {SQUARES.length}
