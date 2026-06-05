@@ -146,9 +146,9 @@ useEffect(() => {
 
       items.sort((a, b) => {
         const aTime =
-          a.timestamp?.seconds || 0;
-        const bTime =
-          b.timestamp?.seconds || 0;
+  a.timestamp?.toMillis?.() || 0;
+const bTime =
+  b.timestamp?.toMillis?.() || 0;
 
         return bTime - aTime;
       });
