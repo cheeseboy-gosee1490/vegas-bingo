@@ -262,6 +262,8 @@ let achievement = null;
 
 if (playerCount === 3) {
   achievement = "🎉 MINI BINGO";
+} else if (playerCount === 5) {
+  achievement = "🎰 BINGO";
 }
 
 await addDoc(
