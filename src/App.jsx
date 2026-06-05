@@ -584,24 +584,38 @@ const bingo = playerCount >= 16;
         key={item.id}
         className="leaderRow"
       >
-        <span
-          style={{
-            color:
-              PLAYER_COLORS[
-                item.player
-              ]
-          }}
-        >
-          ● {item.player}
-        </span>
+        {item.action === "achievement" ? (
+  <span
+    style={{
+      fontWeight: "bold",
+      color: "#fbbf24"
+    }}
+  >
+    {item.achievement.split(" ")[0]} {item.player} achieved{" "}
+    {item.achievement.substring(
+      item.achievement.indexOf(" ") + 1
+    )}
+  </span>
+) : (
+  <>
+    <span
+      style={{
+        color:
+          PLAYER_COLORS[
+            item.player
+          ]
+      }}
+    >
+      ● {item.player}
+    </span>
 
-        <span>
-  {item.action === "claimed"
-    ? `claimed ${item.square}`
-    : item.action === "achievement"
-    ? `achieved ${item.achievement}`
-    : `removed ${item.square}`}
-</span>
+    <span>
+      {item.action === "claimed"
+        ? `claimed ${item.square}`
+        : `removed ${item.square}`}
+    </span>
+  </>
+)}
         
       </div>
     ))}
