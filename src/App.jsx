@@ -264,6 +264,14 @@ if (playerCount === 3) {
   achievement = "🎉 MINI BINGO";
 } else if (playerCount === 5) {
   achievement = "🎰 BINGO";
+} else if (playerCount === 10) {
+  achievement = "🔥 DOUBLE BINGO";
+} else if (playerCount === 20) {
+  achievement = "💰 HIGH ROLLER";
+} else if (playerCount === 25) {
+  achievement = "👑 VEGAS LEGEND";
+} else if (playerCount === 33) {
+  achievement = "🏆 FULL HOUSE";
 }
 
 await addDoc(
