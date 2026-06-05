@@ -251,6 +251,19 @@ if (
   }
 );
 
+const playerCount =
+  Object.values(owners)
+    .filter(
+      (owner) => owner === player
+    )
+    .length + 1;
+
+let achievement = null;
+
+if (playerCount === 3) {
+  achievement = "🎉 MINI BINGO";
+}
+
 await addDoc(
   collection(db, "activity"),
   {
@@ -261,6 +274,18 @@ await addDoc(
   }
 );
 
+  if (achievement) {
+  await addDoc(
+    collection(db, "activity"),
+    {
+      player,
+      action: "achievement",
+      achievement,
+      timestamp: serverTimestamp()
+    }
+  );
+}
+  
   setOwners((prev) => ({
     ...prev,
     [square]: player
@@ -561,10 +586,13 @@ const bingo = playerCount >= 16;
         </span>
 
         <span>
-          {item.action === "claimed"
-            ? `claimed ${item.square}`
-            : `removed ${item.square}`}
-        </span>
+  {item.action === "claimed"
+    ? `claimed ${item.square}`
+    : item.action === "achievement"
+    ? `achieved ${item.achievement}`
+    : `removed ${item.square}`}
+</span>
+        
       </div>
     ))}
   </div>
