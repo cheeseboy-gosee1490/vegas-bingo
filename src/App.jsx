@@ -173,7 +173,10 @@ const bTime =
   const scores = PLAYERS.map((name) => ({
     name,
     score: Object.values(owners)
-      .filter((owner) => owner === name)
+      .filter(
+        (ownerData) =>
+          ownerData?.owner === name
+      )
       .length
   }));
 
@@ -207,7 +210,7 @@ const bTime =
   }, [player]);
 
 const toggleSquare = async (square) => {
-  const owner = owners[square];
+  const owner = owners[square]?.owner;
 
   if (owner === player) {
     await deleteDoc(
