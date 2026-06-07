@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { db } from "./firebase";
+import { db, storage } from "./firebase";
 
 import {
   doc,
@@ -15,6 +15,12 @@ import {
   query,
   where
 } from "firebase/firestore";
+
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "firebase/storage";
 
 import {
   LayoutGrid,
