@@ -256,7 +256,8 @@ if (
   await setDoc(
   doc(db, "squareOwners", square),
   {
-    owner: player
+    owner: player,
+    photoUrl: null
   }
 );
 
