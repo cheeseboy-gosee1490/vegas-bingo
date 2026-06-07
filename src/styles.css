@@ -161,6 +161,8 @@ h2 {
   min-height: 135px;
 
   -webkit-tap-highlight-color: transparent;
+  outline: none;
+  touch-action: manipulation;
   
   border-radius: 18px;
   border: 1px solid #2a2a2a;
@@ -193,7 +195,8 @@ line-height: 1.1;
   overflow-wrap: break-word;
 }
 
-.square:hover {
+@media (hover: hover) {
+  .square:hover {
   border-color: #ff4fc3;
 
   transform: translateY(-2px);
@@ -201,8 +204,14 @@ line-height: 1.1;
   box-shadow:
     0 0 12px #ff4fc3,
     0 0 25px rgba(255,79,195,0.4);
-}
+    }
+ }
 
+.square:focus,
+.square:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
 .found {
   background: linear-gradient(
     135deg,
