@@ -499,11 +499,7 @@ const bingo = playerCount >= 16;
       : undefined
   }}
  onClick={() => {
-  if (owners[square] === player) {
-    toggleSquare(square);
-  } else {
-    setSelectedSquare(square);
-  }
+  setSelectedSquare(square);
 }}
 >
   <div>
