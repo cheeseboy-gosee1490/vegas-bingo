@@ -701,10 +701,17 @@ const bingo = playerCount >= 16;
 />
       {!owners[selectedSquare] && (
   <button
-    onClick={() => {
-      toggleSquare(selectedSquare);
-      setSelectedSquare(null);
-    }}
+    onClick={async () => {
+  if (photo) {
+    console.log(
+      "Photo selected:",
+      photo.name
+    );
+  }
+
+  toggleSquare(selectedSquare);
+  setSelectedSquare(null);
+}}
   >
     Claim Square
   </button>
