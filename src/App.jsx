@@ -128,9 +128,9 @@ useEffect(() => {
       const data = {};
 
       snapshot.forEach((docSnap) => {
-        data[docSnap.id] =
-          docSnap.data().owner;
-      });
+  data[docSnap.id] =
+    docSnap.data();
+});
 
       setOwners(data);
     }
@@ -491,13 +491,19 @@ const bingo = playerCount >= 16;
   key={square}
   className="square"
   style={{
-    borderColor: owners[square]
-      ? PLAYER_COLORS[owners[square]]
-      : undefined,
+    borderColor: owners[square]?.owner
+  ? PLAYER_COLORS[
+      owners[square].owner
+    ]
+  : undefined,
 
-    boxShadow: owners[square]
-      ? `0 0 12px ${PLAYER_COLORS[owners[square]]}`
-      : undefined
+boxShadow: owners[square]?.owner
+  ? `0 0 12px ${
+      PLAYER_COLORS[
+        owners[square].owner
+      ]
+    }`
+  : undefined
   }}
  onClick={() => {
   setSelectedSquare(square);
@@ -506,7 +512,7 @@ const bingo = playerCount >= 16;
   <div>
     <div>{square}</div>
 
-    {owners[square] && (
+    {owners[square]?.owner && (
   <div
     style={{
       marginTop: "8px",
@@ -514,7 +520,7 @@ const bingo = playerCount >= 16;
       fontWeight: "bold",
       color:
         PLAYER_COLORS[
-          owners[square]
+          owners[square].owner
         ],
       display: "flex",
       justifyContent: "center",
@@ -523,9 +529,10 @@ const bingo = playerCount >= 16;
     }}
   >
     <span>●</span>
-    <span>{owners[square]}</span>
+    <span>{owners[square].owner}</span>
   </div>
 )}
+
   </div>
 </button>
   ))}
@@ -665,17 +672,17 @@ const bingo = playerCount >= 16;
     fontSize: "1.1rem",
     fontWeight: "bold",
     marginBottom: "10px",
-    color: owners[selectedSquare]
-      ? PLAYER_COLORS[
-          owners[selectedSquare]
-        ]
-      : "#aaa"
+    color: owners[selectedSquare]?.owner
+  ? PLAYER_COLORS[
+      owners[selectedSquare].owner
+    ]
+  : "#aaa"
   }}
 >
-  👤 {owners[selectedSquare] || "Nobody"}
+  👤 {owners[selectedSquare]?.owner || "Nobody"}
 </div>
 
-{owners[selectedSquare] === player && (
+{owners[selectedSquare]?.owner === player && (
   <button
     onClick={() => {
       toggleSquare(selectedSquare);
@@ -700,7 +707,7 @@ const bingo = playerCount >= 16;
     : "📸 No evidence uploaded yet"}
 </p>
 
-{!owners[selectedSquare] && (      
+{!owners[selectedSquare]?.owner && (    
 <input
   type="file"
   accept="image/*"
@@ -713,7 +720,7 @@ const bingo = playerCount >= 16;
    }}
  />
 )}  
-      {!owners[selectedSquare] && (
+      {!owners[selectedSquare]?.owner && (
   <button
     onClick={async () => {
   if (photo) {
@@ -723,7 +730,7 @@ const bingo = playerCount >= 16;
     );
   }
 
-  toggleSquare(selectedSquare);
+  await toggleSquare(selectedSquare);
   setSelectedSquare(null);
 }}
   >
