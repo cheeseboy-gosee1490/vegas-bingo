@@ -673,6 +673,21 @@ const bingo = playerCount >= 16;
 >
   👤 {owners[selectedSquare] || "Nobody"}
 </div>
+
+{owners[selectedSquare] === player && (
+  <button
+    onClick={() => {
+      toggleSquare(selectedSquare);
+      setSelectedSquare(null);
+    }}
+    style={{
+      marginBottom: "15px"
+    }}
+  >
+    🗑 Delete Claim
+  </button>
+)}
+      
 <p
   style={{
     opacity: 0.7,
