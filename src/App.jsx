@@ -684,6 +684,7 @@ const bingo = playerCount >= 16;
     : "📸 No evidence uploaded yet"}
 </p>
 
+{!owners[selectedSquare] && (      
 <input
   type="file"
   accept="image/*"
@@ -693,8 +694,9 @@ const bingo = playerCount >= 16;
   }
   style={{
     marginBottom: "15px"
-  }}
-/>
+   }}
+ />
+)}  
       {!owners[selectedSquare] && (
   <button
     onClick={async () => {
