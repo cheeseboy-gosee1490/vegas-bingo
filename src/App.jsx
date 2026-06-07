@@ -117,6 +117,9 @@ export default function App() {
   const [selectedSquare, setSelectedSquare] =
   useState(null);
 
+const [photo, setPhoto] = useState(null);
+const [uploading, setUploading] = useState(false);
+
 // square ownership listener
 useEffect(() => {
   const unsubscribe = onSnapshot(
@@ -677,21 +680,25 @@ const bingo = playerCount >= 16;
 <p
   style={{
     opacity: 0.7,
-    marginBottom: "20px"
+    marginBottom: "10px"
   }}
 >
-  📸 No evidence uploaded yet
+  {photo
+    ? `📸 ${photo.name}`
+    : "📸 No evidence uploaded yet"}
 </p>
 
-<button
-  disabled
+<input
+  type="file"
+  accept="image/*"
+  capture="environment"
+  onChange={(e) =>
+    setPhoto(e.target.files[0])
+  }
   style={{
-    opacity: 0.5,
     marginBottom: "15px"
   }}
->
-  📷 View Evidence
-</button>
+/>
       {!owners[selectedSquare] && (
   <button
     onClick={() => {
