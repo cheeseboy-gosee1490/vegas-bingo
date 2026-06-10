@@ -267,7 +267,8 @@ if (
 const playerCount =
   Object.values(owners)
     .filter(
-      (owner) => owner === player
+      (ownerData) =>
+        ownerData?.owner === player
     )
     .length + 1;
 
@@ -310,9 +311,12 @@ await addDoc(
 }
   
   setOwners((prev) => ({
-    ...prev,
-    [square]: player
-  }));
+  ...prev,
+  [square]: {
+    owner: player,
+    photoUrl: null
+  }
+}));
 };
 
   const changePlayer = () => {
@@ -359,7 +363,10 @@ const remaining =
   SQUARES.length - totalClaimed;
 
   const playerCount = Object.values(owners)
-  .filter((owner) => owner === player)
+  .filter(
+    (ownerData) =>
+      ownerData?.owner === player
+  )
   .length;
 
 const bingo = playerCount >= 16;
