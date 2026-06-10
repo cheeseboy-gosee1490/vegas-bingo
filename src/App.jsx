@@ -734,11 +734,17 @@ boxShadow: owners[square]?.owner
   <button
     onClick={async () => {
   if (photo) {
-    console.log(
-      "Photo selected:",
-      photo.name
-    );
-  }
+  const url = await uploadPhoto(
+    selectedSquare,
+    photo
+  );
+
+  alert(
+    `Uploaded!\n${url}`
+  );
+
+  return;
+}
 
   await toggleSquare(selectedSquare);
   setSelectedSquare(null);
