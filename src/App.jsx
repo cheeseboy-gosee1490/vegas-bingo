@@ -352,6 +352,7 @@ await addDoc(
 }));
 }
 
+  };
   const changePlayer = () => {
   localStorage.removeItem(
     "vegas-player"
