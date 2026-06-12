@@ -793,6 +793,10 @@ boxShadow: owners[square]?.owner
   selectedSquare,
   url
 );
+
+    setSelectedSquare(null);
+setPhoto(null);
+    
   } catch (err) {
     alert(err.message);
     console.error(err);
@@ -802,7 +806,7 @@ boxShadow: owners[square]?.owner
     alert("4");
   }}
 >
-  TEST BUTTON
+  Claim Square
 </button>
 )}
 
