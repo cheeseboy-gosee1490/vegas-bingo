@@ -767,34 +767,16 @@ boxShadow: owners[square]?.owner
   alert("2");
 
   try {
-  
-  alert("A");
-
-  const storageRef = ref(
-    storage,
-    `evidence/${square}-${Date.now()}`
-  );
-
-  alert("B");
-
-  await uploadBytes(
-    storageRef,
-    file
-  );
-
-  alert("C");
-
-  const url =
-    await getDownloadURL(
-      storageRef
-    );
-
-  alert("D");
-
-  return url;
-};
+  const url = await uploadPhoto(
+  selectedSquare,
+  photo
+);
 
     alert("3");
+    
+    await toggleSquare(
+      selectedSquare
+    );
   } catch (err) {
     alert(err.message);
     console.error(err);
