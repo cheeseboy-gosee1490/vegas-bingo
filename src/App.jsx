@@ -340,7 +340,7 @@ await addDoc(
   ...prev,
   [square]: {
     owner: player,
-    photoUrl: null
+    photoUrl: photoUrl
   }
 }));
 };
