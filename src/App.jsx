@@ -213,7 +213,6 @@ const uploadPhoto = async (
   square,
   file
 ) => {
-  alert("A");
   
   const storageRef = ref(
     storage,
@@ -776,10 +775,8 @@ boxShadow: owners[square]?.owner
       {!owners[selectedSquare]?.owner && (
   <button
   onClick={async () => {
-    alert("1");
 
     if (photo) {
-  alert("2");
 
   try {
   const url = await uploadPhoto(
@@ -787,7 +784,6 @@ boxShadow: owners[square]?.owner
   photo
 );
 
-    alert(url);
     
     await toggleSquare(
   selectedSquare,
@@ -803,7 +799,6 @@ setPhoto(null);
   }
 }
 
-    alert("4");
   }}
 >
   Claim Square
