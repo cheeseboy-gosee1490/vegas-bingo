@@ -237,6 +237,9 @@ const toggleSquare = async (
   photoUrl = null
 ) => {
   const owner = owners[square]?.owner;
+  
+  const photoUrl =
+  owners[square]?.photoUrl;
 
   if (owner === player) {
     await deleteDoc(
