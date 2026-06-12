@@ -719,15 +719,9 @@ boxShadow: owners[square]?.owner
 </div>
       
 {owners[selectedSquare]?.photoUrl && (
-  <img
-    src={owners[selectedSquare].photoUrl}
-    alt="Evidence"
-    style={{
-      width: "100%",
-      borderRadius: "12px",
-      marginBottom: "15px"
-    }}
-  />
+  <div>
+    URL FOUND
+  </div>
 )}
       
 {owners[selectedSquare]?.owner === player && (
