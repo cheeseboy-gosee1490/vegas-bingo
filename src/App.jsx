@@ -767,10 +767,7 @@ boxShadow: owners[square]?.owner
   alert("2");
 
   try {
-    const uploadPhoto = async (
-  square,
-  file
-) => {
+  
   alert("A");
 
   const storageRef = ref(
