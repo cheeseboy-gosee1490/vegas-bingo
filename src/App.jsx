@@ -772,7 +772,7 @@ boxShadow: owners[square]?.owner
   photo
 );
 
-    alert("3");
+    alert(url);
     
     await toggleSquare(
       selectedSquare
