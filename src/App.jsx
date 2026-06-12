@@ -751,8 +751,8 @@ boxShadow: owners[square]?.owner
   setSelectedSquare(null);
 }}
   >
-    Claim Square
-  </button>
+  TEST BUTTON
+</button>
 )}
 
       <button
