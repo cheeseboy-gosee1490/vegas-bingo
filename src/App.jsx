@@ -117,6 +117,9 @@ export default function App() {
   const [selectedSquare, setSelectedSquare] =
   useState(null);
 
+  const [discoveryPopup, setDiscoveryPopup] =
+  useState(null);
+
 const [photo, setPhoto] = useState(null);
 const [uploading, setUploading] = useState(false);
 
@@ -804,7 +807,11 @@ console.log(
   url
 );
 
-    setSelectedSquare(null);
+setDiscoveryPopup(
+  selectedSquare
+);
+
+setSelectedSquare(null);
 setPhoto(null);
     
   } catch (err) {
