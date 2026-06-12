@@ -743,11 +743,6 @@ boxShadow: owners[square]?.owner
     🗑 Delete Claim
   </button>
 )}
-      
-  {photo
-    ? `📸 ${photo.name}`
-    : "📸 No evidence uploaded yet"}
-</p>
 
 {!owners[selectedSquare]?.owner && (    
 <input
