@@ -896,6 +896,22 @@ setPhoto(null);
 
       <div
   style={{
+    height: "180px",
+    margin: "20px 0",
+    borderRadius: "12px",
+    border: "2px solid #333",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "0.9rem",
+    opacity: 0.6
+  }}
+>
+  ARTWORK COMING SOON
+</div>
+      
+      <div
+  style={{
     fontSize: "4rem",
     margin: "20px 0"
   }}
