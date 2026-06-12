@@ -213,6 +213,8 @@ const uploadPhoto = async (
   square,
   file
 ) => {
+  alert("A");
+  
   const storageRef = ref(
     storage,
     `evidence/${square}-${Date.now()}`
@@ -765,10 +767,35 @@ boxShadow: owners[square]?.owner
   alert("2");
 
   try {
-    const url = await uploadPhoto(
-      selectedSquare,
-      photo
+    const uploadPhoto = async (
+  square,
+  file
+) => {
+  alert("A");
+
+  const storageRef = ref(
+    storage,
+    `evidence/${square}-${Date.now()}`
+  );
+
+  alert("B");
+
+  await uploadBytes(
+    storageRef,
+    file
+  );
+
+  alert("C");
+
+  const url =
+    await getDownloadURL(
+      storageRef
     );
+
+  alert("D");
+
+  return url;
+};
 
     alert("3");
   } catch (err) {
