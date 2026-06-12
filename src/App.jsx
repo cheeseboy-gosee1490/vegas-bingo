@@ -910,15 +910,6 @@ setPhoto(null);
   ARTWORK COMING SOON
 </div>
       
-      <div
-  style={{
-    fontSize: "4rem",
-    margin: "20px 0"
-  }}
->
-  🎰
-</div>
-
 <p
   style={{
     fontSize: "1.2rem",
