@@ -732,25 +732,23 @@ boxShadow: owners[square]?.owner
 )}  
       {!owners[selectedSquare]?.owner && (
   <button
-    onClick={async () => {
-  alert("Button clicked");
-  if (photo) {
-  const url = await uploadPhoto(
-    selectedSquare,
-    photo
-  );
+  onClick={async () => {
+    alert("1");
 
-  alert(
-    `Uploaded!\n${url}`
-  );
+    if (photo) {
+      alert("2");
 
-  return;
-}
+      const url = await uploadPhoto(
+        selectedSquare,
+        photo
+      );
 
-  await toggleSquare(selectedSquare);
-  setSelectedSquare(null);
-}}
-  >
+      alert("3");
+    }
+
+    alert("4");
+  }}
+>
   TEST BUTTON
 </button>
 )}
