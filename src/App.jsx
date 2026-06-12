@@ -736,15 +736,20 @@ boxShadow: owners[square]?.owner
     alert("1");
 
     if (photo) {
-      alert("2");
+  alert("2");
 
-      const url = await uploadPhoto(
-        selectedSquare,
-        photo
-      );
+  try {
+    const url = await uploadPhoto(
+      selectedSquare,
+      photo
+    );
 
-      alert("3");
-    }
+    alert("3");
+  } catch (err) {
+    alert(err.message);
+    console.error(err);
+  }
+}
 
     alert("4");
   }}
