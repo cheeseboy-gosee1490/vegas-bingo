@@ -422,7 +422,7 @@ const bingo = playerCount >= 16;
           setGuestName(e.target.value)
         }
         placeholder="Type your name..."
-        style={{
+          position: "relative",
           display: "block",
           width: "100%",
           maxWidth: "350px",
@@ -684,6 +684,7 @@ boxShadow: owners[square]?.owner
   >
     <div
       style={{
+        position: "relative",
         background: "#111",
         border: "2px solid #ff4fc3",
         borderRadius: "20px",
