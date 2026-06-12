@@ -811,7 +811,8 @@ setPhoto(null);
           setSelectedSquare(null)
         }
         style={{
-          marginLeft: "10px"
+          display: "block",
+          margin: "15px auto 0"
         }}
       >
         Close
