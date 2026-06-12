@@ -722,9 +722,13 @@ boxShadow: owners[square]?.owner
   type="file"
   accept="image/*"
   capture="environment"
-  onChange={(e) =>
-    setPhoto(e.target.files[0])
-  }
+  onChange={(e) => {
+  alert("Photo selected");
+
+  setPhoto(
+    e.target.files[0]
+  );
+}}
   style={{
     marginBottom: "15px"
    }}
