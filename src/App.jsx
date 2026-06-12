@@ -336,6 +336,11 @@ await addDoc(
   );
 }
   
+  console.log(
+  "SETTING OWNER PHOTO:",
+  photoUrl
+);
+  
   setOwners((prev) => ({
   ...prev,
   [square]: {
