@@ -733,6 +733,7 @@ boxShadow: owners[square]?.owner
       {!owners[selectedSquare]?.owner && (
   <button
     onClick={async () => {
+  alert("Button clicked");
   if (photo) {
   const url = await uploadPhoto(
     selectedSquare,
