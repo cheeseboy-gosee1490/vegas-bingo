@@ -785,6 +785,10 @@ boxShadow: owners[square]?.owner
   photo
 );
 
+console.log(
+  "URL SENT:", 
+  url
+);
     
     await toggleSquare(
   selectedSquare,
