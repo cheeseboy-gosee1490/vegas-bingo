@@ -872,14 +872,18 @@ setPhoto(null);
     }}
   >
     <div
-      style={{
-        background: "#111",
-        border: "2px solid #ff4fc3",
-        borderRadius: "20px",
-        padding: "30px",
-        textAlign: "center"
-      }}
-    >
+  style={{
+    background: "#111",
+    border: "3px solid #ff4fc3",
+    borderRadius: "20px",
+    padding: "30px",
+    textAlign: "center",
+    width: "90%",
+    maxWidth: "400px",
+    boxShadow:
+      "0 0 25px rgba(255,79,195,0.5)"
+  }}
+>
       <h2
   style={{
     color: "#ff4fc3",
