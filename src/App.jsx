@@ -209,6 +209,28 @@ const bTime =
     loadPlayer();
   }, [player]);
 
+const uploadPhoto = async (
+  square,
+  file
+) => {
+  const storageRef = ref(
+    storage,
+    `evidence/${square}-${Date.now()}`
+  );
+
+  await uploadBytes(
+    storageRef,
+    file
+  );
+
+  const url =
+    await getDownloadURL(
+      storageRef
+    );
+
+  return url;
+};
+  
 const toggleSquare = async (square) => {
   const owner = owners[square]?.owner;
 
