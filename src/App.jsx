@@ -881,8 +881,8 @@ setPhoto(null);
       }}
     >
       <h2>
-        🎰 {discoveryPopup}
-      </h2>
+  {discoveryPopup}
+</h2>
 
       <div
   style={{
