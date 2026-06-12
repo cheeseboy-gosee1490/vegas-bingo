@@ -720,7 +720,7 @@ boxShadow: owners[square]?.owner
       
 {owners[selectedSquare]?.photoUrl && (
   <div>
-    URL FOUND
+    {owners[selectedSquare].photoUrl}
   </div>
 )}
       
