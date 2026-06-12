@@ -880,8 +880,14 @@ setPhoto(null);
         textAlign: "center"
       }}
     >
-      <h2>
-  {discoveryPopup}
+      <h2
+  style={{
+    color: "#ff4fc3",
+    fontSize: "2rem",
+    marginBottom: "10px"
+  }}
+>
+  {discoveryPopup.toUpperCase()}
 </h2>
 
       <div
