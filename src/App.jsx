@@ -233,7 +233,10 @@ const uploadPhoto = async (
   return url;
 };
   
-const toggleSquare = async (square) => {
+const toggleSquare = async (
+  square,
+  photoUrl = null
+) => {
   const owner = owners[square]?.owner;
 
   if (owner === player) {
@@ -284,7 +287,7 @@ if (
   doc(db, "squareOwners", square),
   {
     owner: player,
-    photoUrl: null
+    photoUrl: photoUrl
   }
 );
 
@@ -775,8 +778,9 @@ boxShadow: owners[square]?.owner
     alert(url);
     
     await toggleSquare(
-      selectedSquare
-    );
+  selectedSquare,
+  url
+);
   } catch (err) {
     alert(err.message);
     console.error(err);
