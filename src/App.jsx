@@ -718,7 +718,11 @@ boxShadow: owners[square]?.owner
 >
   👤 {owners[selectedSquare]?.owner || "Nobody"}
 </div>
-
+      
+{owners[selectedSquare]?.photoUrl && (
+  <div>PHOTO TEST</div>
+)}
+      
 {owners[selectedSquare]?.owner === player && (
   <button
     onClick={() => {
