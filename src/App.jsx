@@ -350,7 +350,7 @@ await addDoc(
     photoUrl: photoUrl
   }
 }));
-};
+}
 
   const changePlayer = () => {
   localStorage.removeItem(
