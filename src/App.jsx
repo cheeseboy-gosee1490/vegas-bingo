@@ -858,34 +858,6 @@ setPhoto(null);
        </div>
   </>
 )}
-    
-  >
-    <div
-      style={{
-        background: "#111",
-        border: "3px solid #fbbf24",
-        borderRadius: "20px",
-        padding: "30px",
-        textAlign: "center",
-        maxWidth: "350px"
-      }}
-    >
-      <h2>
-        🏆 Achievement Unlocked!
-      </h2>
-
-      <p>{achievementPopup}</p>
-
-      <button
-        onClick={() =>
-          setAchievementPopup(null)
-        }
-      >
-        Continue
-      </button>
-    </div>
-  </div>
-)}
       
       <div className="bottomNav">
       <button
