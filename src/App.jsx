@@ -720,17 +720,12 @@ boxShadow: owners[square]?.owner
 </div>
       
 {owners[selectedSquare]?.photoUrl && (
-  <>
-    <div>IMAGE BELOW</div>
-
-    <img
-      src={owners[selectedSquare].photoUrl}
-      alt="Evidence"
-      width="200"
-    />
-  </>
-)}
-      
+ <div
+    style={{
+      position: "relative",
+      display: "inline-block"
+    }}
+  >
 {owners[selectedSquare]?.owner === player && (
   <button
     onClick={() => {
@@ -751,6 +746,16 @@ boxShadow: owners[square]?.owner
     ✕
   </button>
 )}
+   
+    <img
+      src={owners[selectedSquare].photoUrl}
+      alt="Evidence"
+      width="200"
+    />
+  </div>
+)}
+      
+
 
 {!owners[selectedSquare]?.owner && (    
 <input
