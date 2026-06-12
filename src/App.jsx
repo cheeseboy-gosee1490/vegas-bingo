@@ -416,26 +416,26 @@ const bingo = playerCount >= 16;
       </p>
 
       <input
-        type="text"
-        value={guestName}
-        onChange={(e) =>
-          setGuestName(e.target.value)
-        }
-        placeholder="Type your name..."
-          position: "relative",
-          display: "block",
-          width: "100%",
-          maxWidth: "350px",
-          margin: "0 auto 20px",
-          padding: "14px",
-          borderRadius: "12px",
-          border: "2px solid #ff4fc3",
-          background: "#111",
-          color: "white",
-          textAlign: "center",
-          fontSize: "1rem"
-        }}
-      />
+  type="text"
+  value={guestName}
+  onChange={(e) =>
+    setGuestName(e.target.value)
+  }
+  placeholder="Type your name..."
+  style={{
+    display: "block",
+    width: "100%",
+    maxWidth: "350px",
+    margin: "0 auto 20px",
+    padding: "14px",
+    borderRadius: "12px",
+    border: "2px solid #ff4fc3",
+    background: "#111",
+    color: "white",
+    textAlign: "center",
+    fontSize: "1rem"
+  }}
+/>
 
       <button
         className="playerBtn"
