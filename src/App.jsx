@@ -737,10 +737,17 @@ boxShadow: owners[square]?.owner
       setSelectedSquare(null);
     }}
     style={{
-      marginBottom: "15px"
-    }}
+  position: "absolute",
+  top: "10px",
+  right: "10px",
+  width: "36px",
+  height: "36px",
+  borderRadius: "50%",
+  padding: 0,
+  fontSize: "20px"
+}}
   >
-    🗑 Delete Claim
+    ✕
   </button>
 )}
 
