@@ -334,6 +334,10 @@ await addDoc(
       timestamp: serverTimestamp()
     }
   );
+
+  setAchievementPopup(
+    achievement
+  );
 }
   
   console.log(
