@@ -744,12 +744,6 @@ boxShadow: owners[square]?.owner
   </button>
 )}
       
-<p
-  style={{
-    opacity: 0.7,
-    marginBottom: "10px"
-  }}
->
   {photo
     ? `📸 ${photo.name}`
     : "📸 No evidence uploaded yet"}
