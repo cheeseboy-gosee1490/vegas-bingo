@@ -859,6 +859,43 @@ setPhoto(null);
        </div>
   </>
 )}
+{discoveryPopup && (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.9)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 9999
+    }}
+  >
+    <div
+      style={{
+        background: "#111",
+        border: "2px solid #ff4fc3",
+        borderRadius: "20px",
+        padding: "30px",
+        textAlign: "center"
+      }}
+    >
+      <h2>
+        🎰 {discoveryPopup}
+      </h2>
+
+      <p>FOUND!</p>
+
+      <button
+        onClick={() =>
+          setDiscoveryPopup(null)
+        }
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+)}
       
       <div className="bottomNav">
       <button
